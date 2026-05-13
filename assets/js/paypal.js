@@ -92,14 +92,14 @@
             },
             onError: function (err) {
                 console.error('[Aguacatech] PayPal error', err);
-                alert('Something went wrong with PayPal. Refresh and try again, or email support@aguacatech.app.');
+                alert('Something went wrong with PayPal. Refresh and try again, or email support@aguacatech.eu.');
             },
             onCancel: function () {
                 /* No-op: PayPal redraws the buttons. */
             }
         }).render(container).catch(function (err) {
             console.error('[Aguacatech] PayPal render failed', err);
-            container.innerHTML = '<p style="color: var(--text-tertiary); font-size: 13px; text-align: center;">PayPal failed to load. Email <a href="mailto:support@aguacatech.app" style="color: var(--green-light);">support@aguacatech.app</a> to purchase by invoice.</p>';
+            container.innerHTML = '<p style="color: var(--text-tertiary); font-size: 13px; text-align: center;">PayPal failed to load. Email <a href="mailto:support@aguacatech.eu" style="color: var(--green-light);">support@aguacatech.eu</a> to purchase by invoice.</p>';
         });
     }
 
@@ -111,7 +111,7 @@
         a.addEventListener('click', function (e) {
             e.preventDefault();
             const tierId = a.dataset.paypalToggle;
-            alert(`Yearly billing for ${TIERS[tierId].label} requires a PayPal subscription plan. Email support@aguacatech.app and we'll send a recurring invoice link until automated subscriptions ship.`);
+            alert(`Yearly billing for ${TIERS[tierId].label} requires a PayPal subscription plan. Email support@aguacatech.eu and we'll send a recurring invoice link until automated subscriptions ship.`);
         });
     });
 })();
