@@ -24,6 +24,7 @@
             </a>
             <div class="nav-links">
                 <a href="#features">Features</a>
+                <a href="#screens">Screens</a>
                 <a href="#pricing">Pricing</a>
                 <a href="#faq">FAQ</a>
                 <a href="privacy.html">Privacy</a>
@@ -229,6 +230,91 @@
                         <li>Encrypted clipboard with secret redaction</li>
                         <li>Camera / mic activation log</li>
                     </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================= CAROUSEL ======================= -->
+    <section id="screens" class="section" style="padding-top: 0">
+        <div class="container">
+            <div class="section-header">
+                <div class="eyebrow">A look inside</div>
+                <h2 class="h2">Six features. <span class="gradient-text">One native app.</span></h2>
+                <p>Real screenshots from the latest build, no marketing mockups. Swipe, click the dots, or use ← → to walk through.</p>
+            </div>
+
+            <div class="carousel reveal" id="carousel" tabindex="0" aria-roledescription="carousel" aria-label="Aguacatech feature screenshots">
+                <div class="carousel-window">
+                    <div class="carousel-frame">
+                        <div class="window-bar">
+                            <div class="traffic-light red"></div>
+                            <div class="traffic-light yellow"></div>
+                            <div class="traffic-light green"></div>
+                            <span class="window-title" id="carouselWinTitle">aguacatech, System</span>
+                        </div>
+                        <div class="carousel-track" id="carouselTrack">
+                            <div class="carousel-slide is-active"
+                                 data-window="aguacatech, System"
+                                 data-eyebrow="System Monitor"
+                                 data-title="Live Mac vitals at a glance"
+                                 data-desc="CPU, memory pressure, disk, battery, and network in one snapshot. Polls every 1.5s. Hit Diagnose to ask your local model 'why is this slow?' and get a plain-English answer.">
+                                <img src="assets/img/system.png" alt="Aguacatech System dashboard with CPU, memory, disk, battery, and network panels.">
+                            </div>
+                            <div class="carousel-slide"
+                                 data-window="aguacatech, Battery"
+                                 data-eyebrow="Battery"
+                                 data-title="Health and power-flow telemetry"
+                                 data-desc="Cycles, design vs. full-charge capacity, temperature, and live adapter wattage, read straight from IOKit. Polls every 5s, with a plain-English explainer for every metric.">
+                                <img src="assets/img/battery.png" loading="lazy" alt="Aguacatech Battery view showing 100% charge, cycles, health, temperature, and adapter wattage.">
+                            </div>
+                            <div class="carousel-slide"
+                                 data-window="aguacatech, Launch Agents"
+                                 data-eyebrow="Launch Agents"
+                                 data-title="See and disable what auto-starts"
+                                 data-desc="Every launchd entry, agent, and daemon on your Mac in one searchable list. Apple-owned items are filtered by default; one click disables, re-enables, or removes the rest.">
+                                <img src="assets/img/launch-agents.png" loading="lazy" alt="Aguacatech Launch Agents inspector listing third-party launchd entries with disable controls.">
+                            </div>
+                            <div class="carousel-slide"
+                                 data-window="aguacatech, Disk Explorer"
+                                 data-eyebrow="Disk Explorer"
+                                 data-title="Visualize what's eating your disk"
+                                 data-desc="Squarified TreeMap of every byte under any folder. Drill into a node, ask Aguacatech 'safe to delete?', then move it to Trash, all without leaving the app.">
+                                <img src="assets/img/disk-explorer.png" loading="lazy" alt="Aguacatech Disk Explorer showing a squarified TreeMap of folder sizes with a detail panel.">
+                            </div>
+                            <div class="carousel-slide"
+                                 data-window="aguacatech, Permission Inspector"
+                                 data-eyebrow="Permission Inspector"
+                                 data-title="Every app, every permission, in plain English"
+                                 data-desc="Full TCC audit in a single grid. Pick an app and your local model explains, in context, what each granted permission actually lets it do, and whether you should revoke it.">
+                                <img src="assets/img/permissions.png" loading="lazy" alt="Aguacatech Permission Inspector showing a grid of apps and their TCC grants, with an inline LLM explanation panel.">
+                            </div>
+                            <div class="carousel-slide"
+                                 data-window="aguacatech, Xcode Cleanup"
+                                 data-eyebrow="Xcode Cleanup"
+                                 data-title="Recover gigs from Xcode in one click"
+                                 data-desc="DerivedData, Archives, iOS Device Support, Simulator Runtimes, and Simulator Devices, scanned, sized, and selectively purgeable. 30+ GB recoverable on most dev Macs.">
+                                <img src="assets/img/xcode-cleanup.png" loading="lazy" alt="Aguacatech Xcode Cleanup view listing DerivedData, Archives, iOS Device Support, and Simulator caches with sizes.">
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-arrow prev" id="carouselPrev" aria-label="Previous screenshot">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                    </button>
+                    <button class="carousel-arrow next" id="carouselNext" aria-label="Next screenshot">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                    </button>
+                </div>
+
+                <div class="carousel-caption" aria-live="polite">
+                    <div class="carousel-eyebrow" id="carouselEyebrow">System Monitor</div>
+                    <h3 class="carousel-title" id="carouselTitle">Live Mac vitals at a glance</h3>
+                    <p id="carouselDesc">CPU, memory pressure, disk, battery, and network in one snapshot. Polls every 1.5s. Hit Diagnose to ask your local model 'why is this slow?' and get a plain-English answer.</p>
+                </div>
+
+                <div class="carousel-controls">
+                    <div class="carousel-dots" id="carouselDots" role="tablist" aria-label="Choose screenshot"></div>
+                    <div class="carousel-counter mono" id="carouselCounter">1 / 6</div>
                 </div>
             </div>
         </div>
