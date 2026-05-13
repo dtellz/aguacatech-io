@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#07090a">
+    <title>Aguacatech — The Mac power tool that never phones home</title>
+    <meta name="description" content="Local AI agent, disk reclaimer, and privacy sentinel for macOS. Talk to a local model, reclaim 50+ GB, audit every permission. Nothing leaves your Mac.">
+    <meta property="og:title" content="Aguacatech — The Mac power tool that never phones home">
+    <meta property="og:description" content="Local AI agent, disk reclaimer, and privacy sentinel for macOS.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="/assets/img/og.png">
+    <link rel="icon" type="image/svg+xml" href="/assets/img/logo.svg">
+    <link rel="preconnect" href="https://rsms.me">
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+    <link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+<body>
+    <nav class="nav" id="nav">
+        <div class="nav-inner">
+            <a class="brand" href="/">
+                <img src="/assets/img/logo.svg" alt="" width="26" height="26">
+                Aguacatech
+            </a>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#faq">FAQ</a>
+                <a href="/privacy.html">Privacy</a>
+            </div>
+            <div class="nav-cta">
+                <a class="btn btn-secondary btn-sm" href="/download.html">Download</a>
+                <a class="btn btn-primary btn-sm" href="/buy.html">Buy<span class="arrow">→</span></a>
+            </div>
+            <button class="nav-toggle" aria-label="Menu" id="navToggle">Menu</button>
+        </div>
+    </nav>
+
+    <!-- ======================= HERO ======================= -->
+    <header class="hero">
+        <div class="container">
+            <div class="hero-eyebrow"><span class="dot"></span> v0.3 · Native macOS · Universal</div>
+            <h1 class="reveal">The Mac power tool that <span class="gradient-text">never phones home</span>.</h1>
+            <p class="lead reveal">Aguacatech is a local AI agent, disk reclaimer, and privacy sentinel for macOS. Talk to a model running on your own Mac. Reclaim every gigabyte. See every permission and outbound connection. Nothing leaves your machine.</p>
+            <div class="hero-ctas reveal">
+                <a class="btn btn-primary btn-lg" href="/download.html">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    Download for Mac
+                </a>
+                <a class="btn btn-secondary btn-lg" href="#pricing">See pricing<span class="arrow">→</span></a>
+            </div>
+            <div class="hero-meta reveal">
+                <div class="meta-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-12V5l-8-3-8 3v5c0 8 8 12 8 12z"/></svg>
+                    Local-first by design
+                </div>
+                <div class="meta-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 18 0 9 9 0 1 0-18 0M12 3v18M3 12h18"/></svg>
+                    No accounts, no telemetry
+                </div>
+                <div class="meta-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
+                    One-time purchase per tier
+                </div>
+                <div class="meta-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>
+                    macOS 14+ · Apple Silicon + Intel
+                </div>
+            </div>
+
+            <!-- Mock window -->
+            <div class="hero-visual reveal">
+                <div class="window-bar">
+                    <div class="traffic-light red"></div>
+                    <div class="traffic-light yellow"></div>
+                    <div class="traffic-light green"></div>
+                    <span class="window-title">aguacatech — System Monitor</span>
+                </div>
+                <div class="window-body">
+                    <aside class="mock-sidebar">
+                        <div class="group">Workspace</div>
+                        <div class="item">
+                            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                            Chat
+                        </div>
+                        <div class="item active">
+                            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                            System
+                        </div>
+                        <div class="item">
+                            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="10"/></svg>
+                            Network
+                        </div>
+                        <div class="group">Pro</div>
+                        <div class="item">
+                            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
+                            Uninstaller
+                        </div>
+                        <div class="item">
+                            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                            Disk Explorer
+                        </div>
+                        <div class="group">Sentinel</div>
+                        <div class="item">
+                            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                            Permissions
+                        </div>
+                    </aside>
+                    <div class="mock-content">
+                        <div class="mock-card">
+                            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v6m0 8v6M2 12h6m8 0h6M5 5l4.2 4.2M14.8 14.8 19 19M5 19l4.2-4.2M14.8 9.2 19 5"/></svg>
+                            <div>
+                                <h4>Why is this slow?</h4>
+                                <p>Snapshot top processes, memory pressure, crashes, and launchd churn → get a plain-English answer from your local model.</p>
+                            </div>
+                        </div>
+                        <div class="mock-kpis">
+                            <div class="mock-kpi green">
+                                <div class="label">CPU</div>
+                                <div class="value">28%</div>
+                            </div>
+                            <div class="mock-kpi green">
+                                <div class="label">Memory pressure</div>
+                                <div class="value">42%</div>
+                            </div>
+                            <div class="mock-kpi orange">
+                                <div class="label">Thermal</div>
+                                <div class="value">Fair</div>
+                            </div>
+                            <div class="mock-kpi purple">
+                                <div class="label">↓ in/s</div>
+                                <div class="value">2.1 MB</div>
+                            </div>
+                            <div class="mock-kpi purple">
+                                <div class="label">↑ out/s</div>
+                                <div class="value">182 KB</div>
+                            </div>
+                            <div class="mock-kpi green">
+                                <div class="label">Disk free</div>
+                                <div class="value">312 GB</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ======================= TRUST STRIP ======================= -->
+    <section class="section-sm">
+        <div class="container">
+            <div class="trust">
+                <div class="trust-item">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-12V5l-8-3-8 3v5c0 8 8 12 8 12z"/></svg>
+                    <div>
+                        <h4>Offline by default</h4>
+                        <p>Every feature runs against a model on your Mac. No SaaS dependency.</p>
+                    </div>
+                </div>
+                <div class="trust-item">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M4 12h16"/></svg>
+                    <div>
+                        <h4>No accounts</h4>
+                        <p>Buy a license key, paste it in Settings. No sign-up, no email gate.</p>
+                    </div>
+                </div>
+                <div class="trust-item">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
+                    <div>
+                        <h4>One-time purchase</h4>
+                        <p>Pay once per tier. Optional subscription if you prefer.</p>
+                    </div>
+                </div>
+                <div class="trust-item">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18"/></svg>
+                    <div>
+                        <h4>Native macOS</h4>
+                        <p>SwiftUI + AppKit. No Electron, no web wrapper. macOS 14+.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================= PILLARS ======================= -->
+    <section id="features" class="section">
+        <div class="container">
+            <div class="section-header">
+                <div class="eyebrow">Three pillars</div>
+                <h2 class="h2">Everything your Mac wants <span class="gradient-text">to confess.</span></h2>
+                <p>Aguacatech replaces three subscriptions with one app you own forever. Talk to a local model, reclaim your disk, and see every privacy decision macOS made for you.</p>
+            </div>
+            <div class="pillars">
+                <div class="pillar reveal">
+                    <div class="pillar-icon">
+                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                    </div>
+                    <h3>Talk to your Mac</h3>
+                    <p>Streaming chat backed by a local LLM. Tool-calling, screenshots, vision, voice. The agent reads files, drives apps, runs your Shortcuts — with an approval gate before every write.</p>
+                    <ul>
+                        <li>LM Studio / Ollama compatible</li>
+                        <li>MCP client — bring any server's tools</li>
+                        <li>Quick Actions: double-tap ⌥ from anywhere</li>
+                        <li>Diff preview before any destructive call</li>
+                    </ul>
+                </div>
+                <div class="pillar reveal">
+                    <div class="pillar-icon">
+                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h7v7H3z"/><path d="M14 3h7v7h-7z"/><path d="M14 14h7v7h-7z"/><path d="M3 14h7v7H3z"/></svg>
+                    </div>
+                    <h3>Reclaim your disk</h3>
+                    <p>The cleanup tools CleanMyMac wishes it had. TreeMap of every byte. Smart Uninstaller with orphan-leftover detection. 30+ GB Xcode caches in one click.</p>
+                    <ul>
+                        <li>Disk Explorer with squarified TreeMap</li>
+                        <li>Xcode Cleanup (DerivedData, Archives, Simulators)</li>
+                        <li>Reinstall manifests — restore preferences later</li>
+                        <li>"Why is this slow?" one-button diagnostic</li>
+                    </ul>
+                </div>
+                <div class="pillar sentinel reveal">
+                    <div class="pillar-icon">
+                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    </div>
+                    <h3>See everything</h3>
+                    <p>Replace Little Snitch plus a clipboard manager plus that Mic-Drop menu bar app you keep meaning to install. Sentinel watches every grant and every outbound socket.</p>
+                    <ul>
+                        <li>Permission Inspector — full TCC audit</li>
+                        <li>Connection Log — 7-day rolling lsof history</li>
+                        <li>Encrypted clipboard with secret redaction</li>
+                        <li>Camera / mic activation log</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================= FEATURE DEEP DIVE ======================= -->
+    <section class="section" style="padding-top: 0">
+        <div class="container">
+            <div class="features-deep">
+                <div class="feat-card reveal">
+                    <div class="feat-head">
+                        <div class="icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                        </div>
+                        <h4>Approval gates with diff preview</h4>
+                    </div>
+                    <p>Every destructive tool — write_file, run_applescript, every MCP write — pauses the agent and shows you the diff before it runs. Allow once, allow always, or deny.</p>
+                </div>
+                <div class="feat-card reveal">
+                    <div class="feat-head">
+                        <div class="icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                        </div>
+                        <h4>MCP — every tool ecosystem</h4>
+                    </div>
+                    <p>Aguacatech is a Model Context Protocol client. Add GitHub, Postgres, Slack, or any of dozens of MCP servers — their tools join the agent's registry instantly.</p>
+                </div>
+                <div class="feat-card reveal">
+                    <div class="feat-head">
+                        <div class="icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M18.7 8 13 13.7l-3-3L5.3 16.3"/></svg>
+                        </div>
+                        <h4>System Monitor that means something</h4>
+                    </div>
+                    <p>Memory pressure chart with proper thresholds. Per-core CPU bars. Per-process network. Top processes. Live, native, snappy. Click the bandwidth card to drill into per-process flows.</p>
+                </div>
+                <div class="feat-card reveal">
+                    <div class="feat-head">
+                        <div class="icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                        </div>
+                        <h4>Smart Uninstaller</h4>
+                    </div>
+                    <p>Remove an app and review every leftover preference, cache, container, launch agent, and Dock entry — by confidence score. Save a reinstall manifest to restore preferences later.</p>
+                </div>
+                <div class="feat-card reveal">
+                    <div class="feat-head">
+                        <div class="icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 12h.01"/><path d="M9 12h.01"/><circle cx="12" cy="12" r="10"/><path d="M8 16s1.5 2 4 2 4-2 4-2"/></svg>
+                        </div>
+                        <h4>Privacy posture in one glance</h4>
+                    </div>
+                    <p>Permission Inspector audits every TCC grant on your Mac in a single grid. Connection Log keeps 7 days of outbound flows. Find what shouldn't be there, ask the LLM "is this normal?", and revoke.</p>
+                </div>
+                <div class="feat-card reveal">
+                    <div class="feat-head">
+                        <div class="icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-12V5l-8-3-8 3v5c0 8 8 12 8 12z"/></svg>
+                        </div>
+                        <h4>Local by design, end-to-end</h4>
+                    </div>
+                    <p>The model runs on your Mac. Permissions are read from TCC.db on disk. Connection samples come from <code>lsof</code>. Disk scans use <code>du</code>. Nothing is uploaded. Anywhere.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================= PRICING ======================= -->
+    <section id="pricing" class="section">
+        <div class="container">
+            <div class="section-header">
+                <div class="eyebrow">Pricing</div>
+                <h2 class="h2">Four tiers. <span class="gradient-text">No subscriptions forced.</span></h2>
+                <p>Free is generous and stays free. Each paid tier is sold once or yearly — your choice. Buy one tier or bundle them.</p>
+            </div>
+            <div class="tier-grid">
+                <div class="tier free reveal">
+                    <div class="tier-name"><span class="dot"></span> Free</div>
+                    <div class="tier-tagline">The local AI assistant, plus live system insight.</div>
+                    <div class="tier-price">
+                        <div class="amount">$0</div>
+                        <div class="sub">Forever, no key required</div>
+                    </div>
+                    <ul class="tier-features">
+                        <li>Chat with any local model</li>
+                        <li>Quick Actions (⌥⌥)</li>
+                        <li>System Monitor + Network</li>
+                        <li>Logs · Guides · Salty Mug game</li>
+                        <li>Launch Agents (read-only)</li>
+                    </ul>
+                    <div class="tier-cta">
+                        <a class="btn btn-secondary" href="/download.html">Download<span class="arrow">→</span></a>
+                    </div>
+                </div>
+                <div class="tier pro featured reveal">
+                    <div class="tier-badge">Most popular</div>
+                    <div class="tier-name"><span class="dot"></span> Pro</div>
+                    <div class="tier-tagline">Reclaim your disk. The cleanup tools CleanMyMac wishes it had.</div>
+                    <div class="tier-price">
+                        <div class="amount">$29</div>
+                        <div class="sub">One-time · or $19/yr</div>
+                    </div>
+                    <ul class="tier-features">
+                        <li>Full Uninstaller + orphan finder</li>
+                        <li>Disk Explorer (TreeMap)</li>
+                        <li>Xcode Cleanup</li>
+                        <li>"Why is this slow?" diagnostic</li>
+                        <li>Smart Reinstall manifests</li>
+                        <li>Startup waterfall</li>
+                    </ul>
+                    <div class="tier-cta">
+                        <a class="btn btn-primary" href="/buy.html#pro">Buy Pro<span class="arrow">→</span></a>
+                    </div>
+                </div>
+                <div class="tier sentinel reveal">
+                    <div class="tier-name"><span class="dot"></span> Sentinel</div>
+                    <div class="tier-tagline">See every permission, connection, and clipboard touch on your Mac.</div>
+                    <div class="tier-price">
+                        <div class="amount">$49</div>
+                        <div class="sub">One-time · or $29/yr</div>
+                    </div>
+                    <ul class="tier-features">
+                        <li>Permission Inspector (TCC audit)</li>
+                        <li>Outbound Connection Log</li>
+                        <li>Encrypted Clipboard History</li>
+                        <li>Webcam / Mic activation log</li>
+                        <li>Smart Paste</li>
+                        <li>Sketchy-binary scan</li>
+                    </ul>
+                    <div class="tier-cta">
+                        <a class="btn btn-secondary" href="/buy.html#sentinel">Buy Sentinel<span class="arrow">→</span></a>
+                    </div>
+                </div>
+                <div class="tier power reveal">
+                    <div class="tier-name"><span class="dot"></span> Power</div>
+                    <div class="tier-tagline">The agent grows up: voice, memory, MCP, scheduling.</div>
+                    <div class="tier-price">
+                        <div class="amount">$79</div>
+                        <div class="sub">One-time · or $49/yr</div>
+                    </div>
+                    <ul class="tier-features">
+                        <li>MCP client (any MCP server)</li>
+                        <li>Approval gates with diff preview</li>
+                        <li>Push-to-talk voice + TTS</li>
+                        <li>Persistent local memory</li>
+                        <li>Multi-agent + scheduled tasks</li>
+                        <li>Code-agent tools + terminal</li>
+                    </ul>
+                    <div class="tier-cta">
+                        <a class="btn btn-secondary" href="/buy.html#power">Buy Power<span class="arrow">→</span></a>
+                    </div>
+                </div>
+            </div>
+            <p style="text-align:center; margin-top: 36px; color: var(--text-tertiary); font-size: 14px;">
+                Bundle everything — <strong style="color: var(--green-light)">$129 one-time</strong> · or $69/yr.
+                <a href="/buy.html#bundle" style="color: var(--green-light); margin-left: 6px; text-decoration: underline; text-underline-offset: 3px;">Get the bundle</a>
+            </p>
+        </div>
+    </section>
+
+    <!-- ======================= FAQ ======================= -->
+    <section id="faq" class="section">
+        <div class="container container-narrow">
+            <div class="section-header">
+                <div class="eyebrow">Questions</div>
+                <h2 class="h2">Honest answers.</h2>
+                <p>What you'd be wondering. If anything's missing, email us.</p>
+            </div>
+            <div class="faq">
+                <details>
+                    <summary>Does Aguacatech actually run a model on my Mac?</summary>
+                    <p>Yes. Aguacatech is a thin client that talks to whatever OpenAI-compatible endpoint you point it at. The default is LM Studio at <code>http://localhost:1234/v1</code>. You can also use Ollama or any compatible runtime. There's no cloud fallback — if your local server is off, the agent doesn't run.</p>
+                </details>
+                <details>
+                    <summary>Does anything leave my Mac?</summary>
+                    <p>Only the requests you send to your configured LLM endpoint. If that endpoint is local (the default), nothing leaves the machine. Aguacatech has zero telemetry, no analytics, no accounts. Your conversations, logs, scan results, and license key all live in <code>~/Library/Application Support/aguacatech</code>.</p>
+                </details>
+                <details>
+                    <summary>How does the license work?</summary>
+                    <p>After purchase, you receive a license key by email within 24 hours. Paste it into Settings → License. The key activates the matching tier locally — it is not validated against a remote server, ever. You can use the same key on every Mac you own.</p>
+                </details>
+                <details>
+                    <summary>Is this open source?</summary>
+                    <p>The marketing site is. The app itself ships as a notarized DMG. We'll open more components over time, especially MCP-related infrastructure.</p>
+                </details>
+                <details>
+                    <summary>Why both one-time and subscription pricing?</summary>
+                    <p>Some people prefer to buy once and own it. Some people prefer lower-friction yearly payments and continuous updates. You pick. One-time licenses include 12 months of updates by default; subscriptions include updates for as long as they're active.</p>
+                </details>
+                <details>
+                    <summary>What about refunds?</summary>
+                    <p>14-day no-questions refund window. Email us within 14 days of purchase and we'll process it through PayPal.</p>
+                </details>
+                <details>
+                    <summary>System requirements?</summary>
+                    <p>macOS 14 Sonoma or newer. Apple Silicon or Intel. Recommended: 16 GB RAM if you plan to run a 7B-class local model alongside; 32+ GB for larger models. About 200 MB of disk for the app itself.</p>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================= CTA BANNER ======================= -->
+    <section class="section" style="padding-top: 0">
+        <div class="container">
+            <div class="cta-banner">
+                <h2 class="h2">Your Mac. Your model. Your data.</h2>
+                <p>Download the free tier in 30 seconds. Upgrade when you want more. Never let it phone home.</p>
+                <div class="actions">
+                    <a class="btn btn-primary btn-lg" href="/download.html">Download for Mac</a>
+                    <a class="btn btn-secondary btn-lg" href="/buy.html">Browse paid tiers<span class="arrow">→</span></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================= FOOTER ======================= -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <a class="brand" href="/">
+                        <img src="/assets/img/logo.svg" alt="" width="24" height="24">
+                        Aguacatech
+                    </a>
+                    <p class="footer-tagline">The Mac power tool that never phones home. Local AI, real cleanup, total privacy.</p>
+                </div>
+                <div class="footer-col">
+                    <h5>Product</h5>
+                    <ul>
+                        <li><a href="/download.html">Download</a></li>
+                        <li><a href="/#pricing">Pricing</a></li>
+                        <li><a href="/#features">Features</a></li>
+                        <li><a href="/buy.html">Buy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>Company</h5>
+                    <ul>
+                        <li><a href="/privacy.html">Privacy</a></li>
+                        <li><a href="mailto:hello@aguacatech.app">Contact</a></li>
+                        <li><a href="mailto:support@aguacatech.app">Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>Trust</h5>
+                    <ul>
+                        <li>Local-first</li>
+                        <li>No telemetry</li>
+                        <li>No accounts</li>
+                        <li>One-time available</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>© 2026 Aguacatech. All rights reserved.</span>
+                <span class="mono">v0.3 · macOS 14+ · Universal</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/assets/js/main.js" defer></script>
+</body>
+</html>

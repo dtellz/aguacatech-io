@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+  <defs>
+    <linearGradient id="leafGradient" x1="20%" y1="0%" x2="80%" y2="100%">
+      <stop offset="0%" stop-color="#5be08f"/>
+      <stop offset="55%" stop-color="#34c873"/>
+      <stop offset="100%" stop-color="#1d8c4d"/>
+    </linearGradient>
+    <linearGradient id="leafShine" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <g transform="rotate(-22 32 32)">
+    <path d="M32 6
+             C18 6, 10 18, 10 30
+             C10 42, 18 56, 30 58
+             C36 50, 40 40, 40 30
+             C40 20, 38 12, 32 6 Z"
+          fill="url(#leafGradient)"/>
+    <path d="M32 6
+             C18 6, 10 18, 10 30
+             C10 42, 18 56, 30 58
+             C36 50, 40 40, 40 30
+             C40 20, 38 12, 32 6 Z"
+          fill="url(#leafShine)"/>
+    <path d="M32 6 L26 56"
+          stroke="#0e5b30"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          opacity="0.6"/>
+    <path d="M28 18 L22 22"
+          stroke="#0e5b30"
+          stroke-width="1"
+          stroke-linecap="round"
+          opacity="0.4"/>
+    <path d="M30 30 L18 34"
+          stroke="#0e5b30"
+          stroke-width="1"
+          stroke-linecap="round"
+          opacity="0.4"/>
+    <path d="M28 42 L22 46"
+          stroke="#0e5b30"
+          stroke-width="1"
+          stroke-linecap="round"
+          opacity="0.4"/>
+  </g>
+</svg>
