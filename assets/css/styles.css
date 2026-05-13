@@ -782,6 +782,7 @@ body::before {
     .hero .lead { font-size: 18px; }
     .cta-banner { padding: 44px 24px; }
     .footer-bottom { flex-direction: column; align-items: flex-start; gap: 8px; }
+    .nav-download { display: none; }
 }
 
 /* ---------- Feature carousel ---------- */

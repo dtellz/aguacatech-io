@@ -164,12 +164,14 @@
                 z-index: 99; padding: 32px; display: flex; flex-direction: column; gap: 24px;
                 font-size: 24px; font-weight: 600;
             `;
+            const isPhone = window.matchMedia('(max-width: 600px)').matches;
             menu.innerHTML = `
                 <a href="/#features">Features</a>
+                <a href="/#screens">Screens</a>
                 <a href="/#pricing">Pricing</a>
                 <a href="/#faq">FAQ</a>
                 <a href="/privacy.html">Privacy</a>
-                <a href="/download.html">Download</a>
+                ${isPhone ? '' : '<a href="/download.html">Download</a>'}
                 <a href="/buy.html">Buy</a>
             `;
             menu.querySelectorAll('a').forEach((a) => {
