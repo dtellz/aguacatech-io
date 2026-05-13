@@ -1,5 +1,5 @@
 /* =========================================================================
-   Aguacatech — PayPal Smart Buttons integration
+   Aguacatech, PayPal Smart Buttons integration
    ========================================================================= */
 
 /* TODO before going live:
@@ -11,7 +11,7 @@
       and emails it. Until then, fulfillment is manual: you receive a PayPal
       email per purchase and reply with a key.
    3. The `sb` placeholder client id renders working buttons in PayPal's
-      sandbox environment — clicking them does not move real money.
+      sandbox environment, clicking them does not move real money.
 */
 
 (function () {
@@ -23,22 +23,22 @@
     const TIERS = {
         pro: {
             label: 'Aguacatech Pro',
-            description: 'Aguacatech Pro — One-time license',
+            description: 'Aguacatech Pro, One-time license',
             amount: '29.00'
         },
         sentinel: {
             label: 'Aguacatech Sentinel',
-            description: 'Aguacatech Sentinel — One-time license',
+            description: 'Aguacatech Sentinel, One-time license',
             amount: '49.00'
         },
         power: {
             label: 'Aguacatech Power',
-            description: 'Aguacatech Power — One-time license',
+            description: 'Aguacatech Power, One-time license',
             amount: '79.00'
         },
         bundle: {
             label: 'Aguacatech Everything bundle',
-            description: 'Aguacatech Bundle — Pro + Sentinel + Power, one-time',
+            description: 'Aguacatech Bundle, Pro + Sentinel + Power, one-time',
             amount: '129.00'
         }
     };

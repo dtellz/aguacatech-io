@@ -1,6 +1,6 @@
 # aguacatech.app
 
-Marketing site for [Aguacatech](https://aguacatech.app) — the Mac power tool that never phones home.
+Marketing site for [Aguacatech](https://aguacatech.app), the Mac power tool that never phones home.
 
 Static HTML/CSS/JS. No build step. Designed to be hosted on GitHub Pages.
 
@@ -52,7 +52,7 @@ That's it. There's no Jekyll/Hugo/build pipeline. The `.nojekyll` file disables 
 
 ## Going live with PayPal
 
-The current build renders **PayPal Sandbox buttons** (client id `sb`). Clicking them does not move real money — they're for local testing.
+The current build renders **PayPal Sandbox buttons** (client id `sb`). Clicking them does not move real money, they're for local testing.
 
 To take real payments:
 
@@ -76,17 +76,17 @@ The "yearly" toggle on each tier currently shows a hint to email support. To ena
 
 ## Updating prices
 
-Edit `assets/js/paypal.js` — `TIERS[tier].amount` is the dollar string PayPal uses for the order. Also update the visible price in `buy.html` and the pricing section of `index.html`.
+Edit `assets/js/paypal.js`, `TIERS[tier].amount` is the dollar string PayPal uses for the order. Also update the visible price in `buy.html` and the pricing section of `index.html`.
 
 ## Updating the DMG link
 
-`download.html` currently links to `https://github.com/aguacatech/aguacatech/releases/latest/download/Aguacatech.dmg`. Change that to wherever you actually publish the DMG (GitHub Releases is recommended — it gives you free hosting + automatic checksums + release notes).
+`download.html` currently links to `https://github.com/aguacatech/aguacatech/releases/latest/download/Aguacatech.dmg`. Change that to wherever you actually publish the DMG (GitHub Releases is recommended, it gives you free hosting + automatic checksums + release notes).
 
 ## Design
 
 - **Type:** Inter (loaded from rsms.me).
 - **Palette:** dark `#07090a` base, green accent `#34c873`, tier colors purple `#7a78c8` (Sentinel) and orange `#e07534` (Power).
-- **No frameworks.** Pure HTML/CSS/vanilla JS — keeps the site fast and the page-source readable.
+- **No frameworks.** Pure HTML/CSS/vanilla JS, keeps the site fast and the page-source readable.
 
 ## License
 

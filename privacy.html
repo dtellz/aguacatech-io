@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#07090a">
-    <title>Privacy — Aguacatech</title>
+    <title>Privacy, Aguacatech</title>
     <meta name="description" content="Aguacatech is local-first by design. Your conversations, scans, and license key never leave your Mac. What we collect, why, and how to delete it.">
     <link rel="icon" type="image/svg+xml" href="/assets/img/logo.svg">
     <link rel="preconnect" href="https://rsms.me">
@@ -42,7 +42,7 @@
             <li><strong>Conversations.</strong> Stored as JSON under <code>~/Library/Application Support/aguacatech/conversations.json</code>. Never uploaded.</li>
             <li><strong>Logs.</strong> Appended to <code>logs.jsonl</code> in the same directory. Local only. Clear them whenever from the Logs tab.</li>
             <li><strong>License key.</strong> Stored in <code>UserDefaults</code> under your app's bundle identifier. Never validated against a remote server.</li>
-            <li><strong>Scan results.</strong> Disk Explorer trees, Connection Log entries, clipboard history (encrypted at rest), Permission Inspector snapshots — all stored locally.</li>
+            <li><strong>Scan results.</strong> Disk Explorer trees, Connection Log entries, clipboard history (encrypted at rest), Permission Inspector snapshots, all stored locally.</li>
             <li><strong>MCP server configs.</strong> JSON at <code>mcp-servers.json</code> in the same directory. Tokens currently live there in plaintext; Keychain support is on the roadmap.</li>
         </ul>
 
@@ -50,7 +50,7 @@
         <p>Aguacatech only makes outbound network requests in three cases:</p>
         <ul>
             <li><strong>Your configured LLM endpoint.</strong> Whatever URL you set under <code>Settings → General → Endpoint</code>. The default is <code>http://localhost:1234/v1</code> (LM Studio on your Mac). If you point it at a remote endpoint, your prompts go there.</li>
-            <li><strong>MCP HTTP servers you add.</strong> If you add an HTTP-transport MCP server, tool calls travel to that URL. stdio MCP servers run as local subprocesses — no network at all.</li>
+            <li><strong>MCP HTTP servers you add.</strong> If you add an HTTP-transport MCP server, tool calls travel to that URL. stdio MCP servers run as local subprocesses, no network at all.</li>
             <li><strong>Reverse DNS lookups.</strong> The Connection Log resolves remote IPs to hostnames via your OS DNS resolver. Skip-able under <code>Settings → Sentinel</code>.</li>
         </ul>
         <p>That is everything. No analytics. No crash reporters. No "anonymous usage statistics." If the network indicator flickers and you're not chatting with a model, the most likely cause is a Connection Log DNS lookup.</p>
@@ -60,7 +60,7 @@
             <li><strong>Telemetry.</strong> There is no analytics SDK in the app. Period.</li>
             <li><strong>Accounts.</strong> You don't sign up. We don't have a user database.</li>
             <li><strong>License-server pings.</strong> Your key activates locally, by format. No phone-home.</li>
-            <li><strong>Cloud sync.</strong> Conversations, history, configs — none of it syncs anywhere.</li>
+            <li><strong>Cloud sync.</strong> Conversations, history, configs, none of it syncs anywhere.</li>
             <li><strong>Ad tracking.</strong> There are no ads, no trackers, no third-party scripts on this website except the PayPal checkout SDK (on the <a href="/buy.html">buy page</a> only).</li>
         </ul>
 
@@ -85,7 +85,7 @@
         </ul>
 
         <h2>Contact</h2>
-        <p>Questions, concerns, or "wait, what does this actually do?" — <a href="mailto:support@aguacatech.app">support@aguacatech.app</a>. We answer.</p>
+        <p>Questions, concerns, or "wait, what does this actually do?", <a href="mailto:support@aguacatech.app">support@aguacatech.app</a>. We answer.</p>
     </div>
 
     <footer class="footer">
