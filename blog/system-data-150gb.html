@@ -45,7 +45,7 @@
             <span>2026-05-18 · 9 min read · by Diego Tellez</span>
         </div>
         <h1>How I freed 150 GB from "System Data" on my own Mac</h1>
-        <p class="post-lead">The macOS storage gauge has a slice called <strong>"System Data"</strong>. It has no explanation, no drill-in, and no honest way to clean it. On my own daily-driver Mac it had grown to 150 GB. Here is what is actually inside it — and how building Aguacatech finally drained it without a wipe-and-reinstall.</p>
+        <p class="post-lead">The macOS storage gauge has a slice called <strong>"System Data"</strong>. It has no explanation, no drill-in, and no honest way to clean it. On my own daily-driver Mac it had grown to 150 GB. Here is what is actually inside it, and how building Aguacatech finally drained it without a wipe-and-reinstall.</p>
 
         <h2>The slice that ate my disk</h2>
         <p>Open <strong>System Settings → General → Storage</strong> on any working Mac that has been around for a year or two. There is a coloured bar at the top with neat labels: Applications, Documents, Photos, Music, Mail. And then, on the right, a fat gray block labelled <strong>System Data</strong> that nobody ever talks about.</p>
@@ -55,48 +55,48 @@
         <h2>What is actually in there</h2>
         <p>"System Data" is not a folder. It is whatever macOS could not attribute to one of the named categories. In practice, it is mostly the contents of <code>~/Library</code>, plus a handful of system caches, plus a few macOS oddities. On a normal Mac, the heavy hitters are:</p>
         <ul>
-            <li><strong>Xcode caches and simulator runtimes</strong> — <code>~/Library/Developer</code>. On a dev Mac, 50–200 GB. I had 87 GB alone in Simulator Runtimes I had not touched in eight months.</li>
-            <li><strong>Browser caches and service-worker data</strong> — every Chromium-family browser keeps a per-profile cache that can drift into multi-GB territory. Three Chrome profiles + Brave + Arc on the same Mac and you are easily looking at 10 GB.</li>
+            <li><strong>Xcode caches and simulator runtimes</strong>, <code>~/Library/Developer</code>. On a dev Mac, 50–200 GB. I had 87 GB alone in Simulator Runtimes I had not touched in eight months.</li>
+            <li><strong>Browser caches and service-worker data</strong>, every Chromium-family browser keeps a per-profile cache that can drift into multi-GB territory. Three Chrome profiles + Brave + Arc on the same Mac and you are easily looking at 10 GB.</li>
             <li><strong>App containers and Application Support folders</strong> for apps you uninstalled months ago by dragging to the Trash. They never leave; nothing on macOS sweeps them.</li>
             <li><strong>iOS device backups</strong> under <code>~/Library/Application Support/MobileSync/Backup</code>. One iPhone backup is 5–30 GB. Most people who have upgraded phones over the years have three of them sitting around.</li>
-            <li><strong>Time Machine local snapshots</strong>. macOS keeps these "purgeable" — Finder treats them as free, System Settings treats them as System Data. They are the cause of the famous "Finder says I have 300 GB free but Storage shows 50 GB used" mismatch.</li>
+            <li><strong>Time Machine local snapshots</strong>. macOS keeps these "purgeable", Finder treats them as free, System Settings treats them as System Data. They are the cause of the famous "Finder says I have 300 GB free but Storage shows 50 GB used" mismatch.</li>
             <li><strong>Caches under <code>~/Library/Caches</code></strong> for every app that ever ran. Most apps never clean theirs.</li>
             <li><strong>Photo Booth videos, archived Mail attachments, and "Saved Application State"</strong> for apps you forgot existed.</li>
         </ul>
         <p>None of those folders show up in System Settings → Storage. Cumulatively they were 150 GB on my Mac.</p>
 
         <h2>Why a "purge in safe mode" doesn't work</h2>
-        <p>The most-recommended fix online — restart in safe mode, let the disk-usage cleaner run — does one thing reliably: it purges Time Machine local snapshots. That can free 5–30 GB if you are lucky. It does not touch any of the seven categories I just listed. Within a week the gauge climbs back, because the underlying buckets keep growing.</p>
+        <p>The most-recommended fix online, restart in safe mode, let the disk-usage cleaner run, does one thing reliably: it purges Time Machine local snapshots. That can free 5–30 GB if you are lucky. It does not touch any of the seven categories I just listed. Within a week the gauge climbs back, because the underlying buckets keep growing.</p>
 
         <h2>The actual ones that move the needle</h2>
         <p>I built Aguacatech because I wanted a tool that does not lie about what it is doing. Every cleanup feature in the app maps to one of those buckets, with a name, a path on disk, and a Trash move you can undo from Finder. Here is what each one did on my own Mac, in the order I ran them.</p>
 
-        <h3>1. Xcode Cleanup — 87 GB</h3>
+        <h3>1. Xcode Cleanup, 87 GB</h3>
         <p>The single biggest win on any developer Mac. Aguacatech walks <code>~/Library/Developer</code>, cross-references <code>xcrun simctl runtime list -j</code> for Simulator Runtimes, and surfaces every cache, archive, DeviceSupport bundle, and runtime with its real size and last-used date.</p>
-        <p>DerivedData is always safe to nuke. Old Simulator Runtimes (anything you haven't booted in 90+ days) the same. Archives need a beat of thought — but mine were all from apps I had not shipped in a year. Total reclaimed: <strong>87 GB</strong>.</p>
+        <p>DerivedData is always safe to nuke. Old Simulator Runtimes (anything you haven't booted in 90+ days) the same. Archives need a beat of thought, but mine were all from apps I had not shipped in a year. Total reclaimed: <strong>87 GB</strong>.</p>
 
-        <h3>2. Uninstaller orphan scan — 14 GB</h3>
+        <h3>2. Uninstaller orphan scan, 14 GB</h3>
         <p>I had been on macOS for ~10 years on this account. The orphan scanner walks 23 standard cleanup directories looking for entries whose names are bundle-identifier-shaped (<code>com.tinyspeck.slackmacgap</code>, <code>com.docker.Docker</code>) and aren't owned by any currently-installed app. It cross-checks <code>launchctl list</code> so live agents are excluded.</p>
-        <p>It surfaced 412 leftover items totalling <strong>14.2 GB</strong> — containers from old VPN clients, a half-dozen abandoned "menubar productivity" apps, two old IDE caches. Each item had a path I could verify in Finder before checking the box. Every removal went to Trash, not <code>rm</code>.</p>
+        <p>It surfaced 412 leftover items totalling <strong>14.2 GB</strong>, containers from old VPN clients, a half-dozen abandoned "menubar productivity" apps, two old IDE caches. Each item had a path I could verify in Finder before checking the box. Every removal went to Trash, not <code>rm</code>.</p>
 
-        <h3>3. Disk Explorer + iOS backup browser — 22 GB</h3>
+        <h3>3. Disk Explorer + iOS backup browser, 22 GB</h3>
         <p>Three old iPhone backups under <code>~/Library/Application Support/MobileSync/Backup</code>, each with a real device name, model identifier, iOS version, and last-backup timestamp read from the backup's own <code>Info.plist</code>. None of them were for phones I still own. <strong>22 GB</strong> moved to Trash.</p>
 
-        <h3>4. Browser Cleanup — 11 GB</h3>
-        <p>Cache, Service Workers, and GPU Cache across Chrome (three profiles), Brave, and Arc. <strong>11 GB</strong>. Cookies and history were left alone — I would have lost too many open sessions.</p>
+        <h3>4. Browser Cleanup, 11 GB</h3>
+        <p>Cache, Service Workers, and GPU Cache across Chrome (three profiles), Brave, and Arc. <strong>11 GB</strong>. Cookies and history were left alone, I would have lost too many open sessions.</p>
 
-        <h3>5. Duplicates — 6 GB</h3>
+        <h3>5. Duplicates, 6 GB</h3>
         <p>Mostly downloaded PDFs that I had AirDropped from my iPad and then redownloaded from email, and ~600 photos that lived both in <code>~/Pictures</code> and in an old iCloud-evicted backup folder. Perceptual hash (dHash with Hamming distance 6) caught the photos even though they had different file sizes from re-saves at different JPEG quality levels. <strong>6 GB</strong>.</p>
 
-        <h3>6. Time Machine local snapshots — 9 GB</h3>
+        <h3>6. Time Machine local snapshots, 9 GB</h3>
         <p>Aguacatech does not delete TM snapshots itself, but System Monitor's disk breakdown card calls them out by name and links to <code>tmutil deletelocalsnapshots</code>. I did it manually from Terminal once I knew to look. <strong>9 GB</strong>.</p>
 
-        <h3>7. Misc — 4 GB</h3>
+        <h3>7. Misc, 4 GB</h3>
         <p>Photo Booth videos from 2019. Saved Application State for apps I haven't run in two years. A copy of <em>Big Buck Bunny</em> in <code>~/Movies</code> that I had completely forgotten about. <strong>4 GB</strong>.</p>
 
         <div class="post-callout">
             <h4>Total</h4>
-            <p><strong>153 GB</strong> moved to Trash on a single Saturday afternoon. The "System Data" slice dropped from 248 GB to 95 GB. Two years later, having used the same Mac as my daily driver throughout, it has crept back to 110 GB — well within sane bounds, and the tools above keep it that way with a 20-minute monthly sweep.</p>
+            <p><strong>153 GB</strong> moved to Trash on a single Saturday afternoon. The "System Data" slice dropped from 248 GB to 95 GB. Two years later, having used the same Mac as my daily driver throughout, it has crept back to 110 GB, well within sane bounds, and the tools above keep it that way with a 20-minute monthly sweep.</p>
         </div>
 
         <h2>Why this matters past "free disk"</h2>
@@ -104,7 +104,7 @@
         <p>Recovering 150 GB on a four-year-old Mac is the cheapest possible performance upgrade. It is also the one you can do today without spending money on new hardware.</p>
 
         <h2>Trust, undo, and the part where I don't ask you to take my word</h2>
-        <p>Everything Aguacatech removes goes to the macOS Trash via <code>FileManager.trashItem</code> — the exact same call Finder uses. Nothing is permanently deleted by the app. If you change your mind, right-click in Trash → <strong>Put Back</strong>. Root-owned files (under <code>/Library/*</code>) require an admin password once per batch; macOS shows its own standard prompt. Aguacatech never escalates silently.</p>
+        <p>Everything Aguacatech removes goes to the macOS Trash via <code>FileManager.trashItem</code>, the exact same call Finder uses. Nothing is permanently deleted by the app. If you change your mind, right-click in Trash → <strong>Put Back</strong>. Root-owned files (under <code>/Library/*</code>) require an admin password once per batch; macOS shows its own standard prompt. Aguacatech never escalates silently.</p>
         <p>Every operation is also logged to the in-app Logs tab with timestamp, source, and the literal path that moved. You can copy the whole thing to your clipboard to paste into a notebook if you want a record.</p>
 
         <div class="post-end">

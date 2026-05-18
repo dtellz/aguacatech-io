@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#07090a">
     <title>Why the Aguacatech uninstaller cleans more than CleanMyMac · Aguacatech</title>
-    <meta name="description" content="Dragging an app to the Trash leaves behind 15 standard cleanup directories of cruft, a launchd registration, and an undead Dock pin. Here is how we find each one — and what AppCleaner misses.">
+    <meta name="description" content="Dragging an app to the Trash leaves behind 15 standard cleanup directories of cruft, a launchd registration, and an undead Dock pin. Here is how we find each one, and what AppCleaner misses.">
     <link rel="canonical" href="https://aguacatech.eu/blog/uninstaller-vs-cleanmymac.html">
     <meta property="og:title" content="Why the Aguacatech uninstaller cleans more than CleanMyMac">
     <meta property="og:description" content="The 15 directories every macOS uninstall should sweep, plus the Dock-pin and orphan-bundle edge cases nobody else handles.">
@@ -45,7 +45,7 @@
             <span>2026-05-06 · 8 min read</span>
         </div>
         <h1>Why the Aguacatech uninstaller cleans more than CleanMyMac (and AppCleaner)</h1>
-        <p class="post-lead">"Drag the app to the Trash" is the wrong mental model. A modern macOS app is not just an <code>.app</code> bundle — it is also preferences, containers, caches, login items, launch agents, and a Dock pin. Here is the full surface area an honest uninstaller should sweep, plus the orphan and Dock-pin cases the other tools miss.</p>
+        <p class="post-lead">"Drag the app to the Trash" is the wrong mental model. A modern macOS app is not just an <code>.app</code> bundle, it is also preferences, containers, caches, login items, launch agents, and a Dock pin. Here is the full surface area an honest uninstaller should sweep, plus the orphan and Dock-pin cases the other tools miss.</p>
 
         <h2>The 15 directories every uninstall touches</h2>
         <p>When you install a Mac app from outside the App Store, it scatters state across a fixed set of well-known directories. App Store apps are tighter (everything is supposed to live inside a container) but in practice most non-trivial apps still scatter. These are the standard cleanup directories Aguacatech scans every time:</p>
@@ -72,49 +72,49 @@
 /Library/PreferencePanes
 /Library/Services
 /private/var/db/receipts</code></pre>
-        <p>That last one — <code>/private/var/db/receipts</code> — is the installer receipts produced by <code>.pkg</code> installations. Forgetting it means <code>pkgutil --pkgs</code> still thinks the app is installed even after you uninstall it.</p>
+        <p>That last one, <code>/private/var/db/receipts</code>, is the installer receipts produced by <code>.pkg</code> installations. Forgetting it means <code>pkgutil --pkgs</code> still thinks the app is installed even after you uninstall it.</p>
 
         <h2>Three confidence tiers, never just substring</h2>
-        <p>The naive uninstaller does a substring match: "find every file whose name contains 'Slack'". This produces false positives — <code>Slackware.txt</code> in your Downloads matches "Slack" and looks like a leftover, but is not. Aguacatech grades every match against the app's <strong>bundle identifier</strong> (the reverse-DNS one, like <code>com.tinyspeck.slackmacgap</code>) rather than its display name:</p>
+        <p>The naive uninstaller does a substring match: "find every file whose name contains 'Slack'". This produces false positives, <code>Slackware.txt</code> in your Downloads matches "Slack" and looks like a leftover, but is not. Aguacatech grades every match against the app's <strong>bundle identifier</strong> (the reverse-DNS one, like <code>com.tinyspeck.slackmacgap</code>) rather than its display name:</p>
         <ul>
-            <li><strong>HIGH</strong> — the path contains the full bundle identifier. Almost certainly belongs to the app. Pre-selected.</li>
-            <li><strong>MEDIUM</strong> — the path matches the vendor prefix of the bundle ID (e.g. <code>com.tinyspeck.*</code>), or the display name appears as a separator-bounded token (<code>Slack/</code>, <code>Slack.plist</code>). Pre-selected.</li>
-            <li><strong>LOW</strong> — a loose substring match. Hidden behind a toggle by default, because this is where false positives live.</li>
+            <li><strong>HIGH</strong>, the path contains the full bundle identifier. Almost certainly belongs to the app. Pre-selected.</li>
+            <li><strong>MEDIUM</strong>, the path matches the vendor prefix of the bundle ID (e.g. <code>com.tinyspeck.*</code>), or the display name appears as a separator-bounded token (<code>Slack/</code>, <code>Slack.plist</code>). Pre-selected.</li>
+            <li><strong>LOW</strong>, a loose substring match. Hidden behind a toggle by default, because this is where false positives live.</li>
         </ul>
         <p>The result: scanning to uninstall an app with a very generic name like "Notes" or "Calculator" produces a lot of LOW hits, but no LOW hits are removed unless you opt in. Apps with vendor-prefixed bundle IDs like <code>com.tinyspeck.slackmacgap</code> get a clean HIGH-only result.</p>
 
         <h2>The Dock pin nobody else cleans</h2>
         <p>Trashing an <code>.app</code> bundle does <strong>not</strong> remove its tile from your Dock. The Dock layout is stored inside <code>~/Library/Preferences/com.apple.dock.plist</code> under <code>persistent-apps</code> and <code>recent-apps</code>. So even after AppCleaner "cleans up" an uninstall, you are usually left with a Dock icon that pops up "?" because the app it points at no longer exists.</p>
-        <p>Aguacatech detects this. If the uninstaller finds an entry for the trashed app in <code>com.apple.dock</code>, it appears as a row labelled <em>"Still pinned in the Dock"</em> at the top of the dangling list with HIGH confidence and a Dock icon. Checking it edits Dock preferences via the standard <code>UserDefaults</code> API, then <code>killall Dock</code> so the Dock respawns with the updated layout. The Dock briefly disappears and comes back — that's expected.</p>
+        <p>Aguacatech detects this. If the uninstaller finds an entry for the trashed app in <code>com.apple.dock</code>, it appears as a row labelled <em>"Still pinned in the Dock"</em> at the top of the dangling list with HIGH confidence and a Dock icon. Checking it edits Dock preferences via the standard <code>UserDefaults</code> API, then <code>killall Dock</code> so the Dock respawns with the updated layout. The Dock briefly disappears and comes back, that's expected.</p>
 
-        <h2>Orphan scan — the files from apps you uninstalled months ago</h2>
-        <p>The flip side of "uninstall this app properly" is "find the cruft from apps I dragged to the Trash six months ago and never thought about again". This is where every "Mac cleaner" tool I know of fails — they only work in the moment.</p>
+        <h2>Orphan scan, the files from apps you uninstalled months ago</h2>
+        <p>The flip side of "uninstall this app properly" is "find the cruft from apps I dragged to the Trash six months ago and never thought about again". This is where every "Mac cleaner" tool I know of fails, they only work in the moment.</p>
         <p>Aguacatech's <strong>Orphan mode</strong> walks the same set of directories, but instead of starting from a chosen app, it looks for entries with bundle-identifier-shaped names and groups them by bundle ID. Then it runs four filters:</p>
         <ol>
-            <li><strong>Exact match against installed apps</strong> — <code>com.tinyspeck.slackmacgap</code> matches the currently installed Slack? Skip. Not an orphan.</li>
-            <li><strong>Prefix match against installed apps</strong> — <code>com.tinyspeck.slackmacgap.helper</code> starts with an installed app's bundle ID plus a dot? Helper sub-bundle of a live parent. Skip. (Without this, XPC and framework sub-bundles of installed apps were the #1 source of false positives.)</li>
-            <li><strong>Apple-owned and shared-sandbox skips</strong> — <code>com.apple.*</code> and <code>group.*</code> (the iCloud/Family Sharing groups used by multiple apps) are unconditionally skipped.</li>
-            <li><strong>launchd cross-check</strong> — for entries under <code>LaunchAgents</code>/<code>LaunchDaemons</code>, the scanner runs <code>launchctl list</code> once at scan start. If a plist's label is in the active set, the service is still loaded — skip it entirely. If it isn't loaded but the binary referenced by <code>Program</code> still exists on disk, demote to MEDIUM with a "linked binary still exists" reason. Only fully orphaned plists stay HIGH.</li>
+            <li><strong>Exact match against installed apps</strong>, <code>com.tinyspeck.slackmacgap</code> matches the currently installed Slack? Skip. Not an orphan.</li>
+            <li><strong>Prefix match against installed apps</strong>, <code>com.tinyspeck.slackmacgap.helper</code> starts with an installed app's bundle ID plus a dot? Helper sub-bundle of a live parent. Skip. (Without this, XPC and framework sub-bundles of installed apps were the #1 source of false positives.)</li>
+            <li><strong>Apple-owned and shared-sandbox skips</strong>, <code>com.apple.*</code> and <code>group.*</code> (the iCloud/Family Sharing groups used by multiple apps) are unconditionally skipped.</li>
+            <li><strong>launchd cross-check</strong>, for entries under <code>LaunchAgents</code>/<code>LaunchDaemons</code>, the scanner runs <code>launchctl list</code> once at scan start. If a plist's label is in the active set, the service is still loaded, skip it entirely. If it isn't loaded but the binary referenced by <code>Program</code> still exists on disk, demote to MEDIUM with a "linked binary still exists" reason. Only fully orphaned plists stay HIGH.</li>
         </ol>
         <p>The launchd cross-check alone eliminated most false positives in the first month of testing. It is also where the orphan scan earns its name: it is the only category in Aguacatech that surfaces files attributable to apps you uninstalled <em>before</em> you ever installed Aguacatech.</p>
 
         <h2>Why "always Trash, never <code>rm</code>"</h2>
-        <p>Every removal — app bundles, leftover preferences, root-owned <code>/Library/LaunchDaemons</code> plists, the lot — moves to the macOS Trash via <code>FileManager.trashItem</code>. Nothing is permanently deleted by Aguacatech. If you change your mind about anything, right-click in Finder's Trash → <strong>Put Back</strong> restores it to its original location.</p>
+        <p>Every removal, app bundles, leftover preferences, root-owned <code>/Library/LaunchDaemons</code> plists, the lot, moves to the macOS Trash via <code>FileManager.trashItem</code>. Nothing is permanently deleted by Aguacatech. If you change your mind about anything, right-click in Finder's Trash → <strong>Put Back</strong> restores it to its original location.</p>
         <p>Root-owned files (under <code>/Library/*</code>, <code>/private/var/db/receipts/</code>) are typically owned by <code>root:admin</code> because they were dropped by a <code>.pkg</code> installer. Aguacatech collects them into a batch and surfaces a yellow card after the user-level cleanup: <em>"N system-level files need admin to remove."</em> Click the admin button and macOS shows its standard authentication dialog <strong>once</strong>; a single <code>do shell script "mv …" with administrator privileges</strong> reuses that credential for the whole batch. Silent escalation would be a UX trap; the explicit prompt makes the privilege boundary visible.</p>
 
         <h2>What AppCleaner does differently</h2>
         <p>AppCleaner is excellent at what it does. Its weaknesses, in our experience:</p>
         <ul>
-            <li>No orphan mode — only works in the moment of uninstall.</li>
+            <li>No orphan mode, only works in the moment of uninstall.</li>
             <li>No Dock-pin cleanup.</li>
             <li>No launchd cross-check, so it sometimes flags live agents as removable.</li>
             <li>No installer-receipt cleanup, so <code>pkgutil</code> reports stay stale.</li>
-            <li>No reinstall manifest — once you uninstall, your preferences are gone forever.</li>
+            <li>No reinstall manifest, once you uninstall, your preferences are gone forever.</li>
         </ul>
 
-        <h2>Smart Reinstall — the manifest CleanMyMac doesn't write</h2>
+        <h2>Smart Reinstall, the manifest CleanMyMac doesn't write</h2>
         <p>Before any leftover heads to the Trash, Aguacatech can capture a <strong>reinstall manifest</strong>: a JSON file at <code>~/Library/Application Support/aguacatech/reinstall-manifests/&lt;bundle-id&gt;.json</code> recording every preference and support file the user approved for removal. Small files (≤ 1 MB) inline their contents as base64; larger files store a path + SHA-256 reference.</p>
-        <p>If you reinstall the app later, open Aguacatech's <strong>Saved manifests</strong> tab and click Restore. Preferences are written back to their original paths. Files already at the destination get a timestamped backup alongside them — never overwritten. Every action is logged. LaunchAgents are off by default — you re-enable them explicitly, because a stale launch agent is the most common cause of "this old version of an app keeps coming back".</p>
+        <p>If you reinstall the app later, open Aguacatech's <strong>Saved manifests</strong> tab and click Restore. Preferences are written back to their original paths. Files already at the destination get a timestamped backup alongside them, never overwritten. Every action is logged. LaunchAgents are off by default, you re-enable them explicitly, because a stale launch agent is the most common cause of "this old version of an app keeps coming back".</p>
 
         <h2>Where Aguacatech also stops</h2>
         <p>It is worth being explicit about what we won't touch:</p>

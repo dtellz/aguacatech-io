@@ -45,7 +45,7 @@
             <span>2026-04-21 · 6 min read</span>
         </div>
         <h1>Eight Mac maintenance habits that buy you another two years</h1>
-        <p class="post-lead">Apple Silicon Macs hold up well past their warranty if you treat them right. Most of the "my Mac is getting old" feeling is not the hardware — it is accumulated cruft, runaway launch agents, and a disk that has crept past 90% full. Here are the eight habits that genuinely move the needle, with how often to actually do each.</p>
+        <p class="post-lead">Apple Silicon Macs hold up well past their warranty if you treat them right. Most of the "my Mac is getting old" feeling is not the hardware, it is accumulated cruft, runaway launch agents, and a disk that has crept past 90% full. Here are the eight habits that genuinely move the needle, with how often to actually do each.</p>
 
         <h2>1. Keep at least 15% of your disk free</h2>
         <p><strong>How often:</strong> check monthly.</p>
@@ -64,7 +64,7 @@
         <h2>4. Audit your TCC permissions twice a year</h2>
         <p><strong>How often:</strong> every 6 months, plus after any "what does this app need this for?" moment.</p>
         <p>macOS asks you for permissions one at a time, in the moment, on a particular Tuesday afternoon when you are trying to do something else. Six months later, you have granted Accessibility to eleven apps and you cannot tell me what eight of them are for.</p>
-        <p>The TCC.db is the source of truth. <code>~/Library/Application Support/com.apple.TCC/TCC.db</code> + <code>/Library/Application Support/com.apple.TCC/TCC.db</code>. Aguacatech's Permission Inspector reads both and shows you a grid: apps as rows, permissions as columns. Pay particular attention to anything with <strong>Full Disk Access</strong>, <strong>Screen Recording</strong>, or <strong>Accessibility</strong> — those are the high-leverage ones. Anything you cannot justify, revoke.</p>
+        <p>The TCC.db is the source of truth. <code>~/Library/Application Support/com.apple.TCC/TCC.db</code> + <code>/Library/Application Support/com.apple.TCC/TCC.db</code>. Aguacatech's Permission Inspector reads both and shows you a grid: apps as rows, permissions as columns. Pay particular attention to anything with <strong>Full Disk Access</strong>, <strong>Screen Recording</strong>, or <strong>Accessibility</strong>, those are the high-leverage ones. Anything you cannot justify, revoke.</p>
 
         <h2>5. Don't pin apps you don't use</h2>
         <p><strong>How often:</strong> ongoing.</p>
@@ -72,7 +72,7 @@
 
         <h2>6. Empty Trash, but not Photos Trash, weekly</h2>
         <p><strong>How often:</strong> every Friday.</p>
-        <p>The user Trash is unbounded — files moved there stay forever until emptied. On a Mac doing serious cleanup, this can grow to 20 GB inside a week. Empty it.</p>
+        <p>The user Trash is unbounded, files moved there stay forever until emptied. On a Mac doing serious cleanup, this can grow to 20 GB inside a week. Empty it.</p>
         <p>Photos has its own "Recently Deleted" with a <strong>30-day grace period</strong>. Don't empty that on a schedule; it is your only recovery path for an accidental swipe. Same for Mail → Trash if you use Mail.</p>
 
         <h2>7. Restart at least once a month</h2>
@@ -103,7 +103,7 @@
             <li><strong>Monthly (10 min):</strong> restart. Run Aguacatech's Browser Cleanup on the browsers you use most. Skim the Connection Log for anything that looks weird.</li>
             <li><strong>Quarterly (30 min):</strong> Xcode Cleanup (if you ship code). Uninstaller orphan scan. Launch Agents audit. Permission Inspector revoke pass.</li>
         </ul>
-        <p>The Power tier lets you encode any of the above as a <strong>scheduled task</strong> that runs the agent against a structured snapshot on a real cadence — but a calendar reminder works too.</p>
+        <p>The Power tier lets you encode any of the above as a <strong>scheduled task</strong> that runs the agent against a structured snapshot on a real cadence, but a calendar reminder works too.</p>
 
         <div class="post-end">
             <p>Aguacatech bundles the cleanup, audit, and inspection tools into one native app that runs entirely on your Mac. Free tier already includes System Monitor, Network, Launch Agents browsing, and Quick Actions.</p>

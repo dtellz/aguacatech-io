@@ -48,16 +48,16 @@
         <p class="post-lead">If you ship Apple-platform code, this folder is silently the second-biggest thing on your disk after your home directory. Five buckets, 50–200 GB on a typical working Mac. Here is what each one is for, and which ones you can clear today without breaking anything tomorrow.</p>
 
         <h2>Why Xcode keeps so much</h2>
-        <p>Xcode is, structurally, a build system that caches very aggressively, plus a simulator host that mounts macOS-sized DMGs for every iOS version it has ever supported, plus an archive store that keeps full app bundles around for App Store re-submission and crash symbolication. None of that is wrong on its own — each cache exists for a reason. The problem is that Xcode never thins them automatically. Files from 2021 still live there next to files from yesterday.</p>
+        <p>Xcode is, structurally, a build system that caches very aggressively, plus a simulator host that mounts macOS-sized DMGs for every iOS version it has ever supported, plus an archive store that keeps full app bundles around for App Store re-submission and crash symbolication. None of that is wrong on its own, each cache exists for a reason. The problem is that Xcode never thins them automatically. Files from 2021 still live there next to files from yesterday.</p>
         <p>Result: on a Mac that has shipped a few apps and run a few WWDC betas, <code>~/Library/Developer</code> grows to 50–200 GB without anyone noticing. Here are the five things inside it.</p>
 
-        <h2>1. DerivedData — the easy GB</h2>
+        <h2>1. DerivedData, the easy GB</h2>
         <p>Path: <code>~/Library/Developer/Xcode/DerivedData/&lt;workspace&gt;-&lt;hash&gt;/</code></p>
         <p>What it is: per-project module caches, build products, indexes, logs. Recreated on the next build. Usually 1–8 GB per active project, and there is one folder per project you have <em>ever</em> opened.</p>
         <p>Safe to delete? <strong>Always.</strong> Xcode rebuilds whatever it needs. The only side effect is the next build of any active project is a clean build (slower), and the in-IDE index has to rebuild (a few minutes of "Indexing…" in the status bar).</p>
         <p>Common mistake: deleting DerivedData while Xcode is running, which can wedge the build system mid-write. Quit Xcode first. (Aguacatech's Xcode Cleanup refuses to touch DerivedData while Xcode is running.)</p>
 
-        <h2>2. Archives — the one that needs thought</h2>
+        <h2>2. Archives, the one that needs thought</h2>
         <p>Path: <code>~/Library/Developer/Xcode/Archives/&lt;date&gt;/</code></p>
         <p>What it is: <code>.xcarchive</code> bundles produced by Product → Archive. Each archive contains the app's binary, its dSYMs (debug symbols), and the build manifest. Roughly 100–500 MB each.</p>
         <p>Safe to delete? <strong>Mostly, with a caveat.</strong> You need the dSYMs from an archive to symbolicate crash reports from that build, and you can't re-upload a build to App Store Connect without the original archive. So:</p>
@@ -67,34 +67,34 @@
             <li>Archives from the last 60 days for an active app: keep them.</li>
         </ul>
 
-        <h2>3. iOS Device Support — usually safe, occasionally surprising</h2>
+        <h2>3. iOS Device Support, usually safe, occasionally surprising</h2>
         <p>Path: <code>~/Library/Developer/Xcode/iOS DeviceSupport/&lt;ios_version&gt; &lt;build&gt;/</code> (plus watchOS, tvOS, visionOS variants).</p>
         <p>What it is: per-device, per-iOS-version symbol files for every real iPhone or iPad you have ever plugged in to debug. 1–5 GB each. Required for live debugging against that device+OS combo.</p>
-        <p>Safe to delete? <strong>Yes for old majors (iOS 13/14/15/16), maybe for the current major.</strong> Xcode re-downloads the support folder for any device you plug in again — it just takes a few minutes the first time. If you only debug on the latest iOS, you can nuke everything older today.</p>
+        <p>Safe to delete? <strong>Yes for old majors (iOS 13/14/15/16), maybe for the current major.</strong> Xcode re-downloads the support folder for any device you plug in again, it just takes a few minutes the first time. If you only debug on the latest iOS, you can nuke everything older today.</p>
 
-        <h2>4. Simulator Runtimes — the silent giant</h2>
+        <h2>4. Simulator Runtimes, the silent giant</h2>
         <p>Path: mounted DMG-backed volumes at <code>/Library/Developer/CoreSimulator/Volumes/&lt;runtime&gt;/</code>, plus cache bundles under <code>~/Library/Developer/CoreSimulator/Caches/</code>.</p>
         <p>What it is: one full macOS-sized DMG per iOS version (or watchOS, or tvOS, or visionOS) that you have installed. <strong>4–9 GB each.</strong> On a dev Mac that has been keeping current for two years across iOS 16/17/18, plus watchOS, you can easily have 50+ GB in here.</p>
-        <p>Safe to delete? <strong>Yes for runtimes you haven't used in 90+ days.</strong> Xcode → Settings → Platforms can re-download any of them in 10 minutes. The trap is that these are root-owned mounted volumes, so they don't go to Trash — they delete permanently via <code>xcrun simctl runtime delete &lt;identifier&gt;</code>. Aguacatech shows a pre-clean confirmation sheet that names every runtime by ID and version before deleting.</p>
+        <p>Safe to delete? <strong>Yes for runtimes you haven't used in 90+ days.</strong> Xcode → Settings → Platforms can re-download any of them in 10 minutes. The trap is that these are root-owned mounted volumes, so they don't go to Trash, they delete permanently via <code>xcrun simctl runtime delete &lt;identifier&gt;</code>. Aguacatech shows a pre-clean confirmation sheet that names every runtime by ID and version before deleting.</p>
 
-        <h2>5. Simulator Devices — the dust under the rug</h2>
+        <h2>5. Simulator Devices, the dust under the rug</h2>
         <p>Path: <code>~/Library/Developer/CoreSimulator/Devices/&lt;uuid&gt;/</code>, enumerated via <code>xcrun simctl list -j devices</code>.</p>
-        <p>What it is: every simulated device you have ever created — including the dozen Xcode auto-spawns the first time you use a new iOS version. Each device has its own <code>data</code> directory which can accumulate gigabytes of test app sandboxes, screenshots, and Core Data stores.</p>
-        <p>Safe to delete? <strong>Yes for devices not booted in 90+ days.</strong> Same caveat as runtimes — these delete permanently via <code>xcrun simctl delete &lt;uuid&gt;</code>, not to Trash. Aguacatech surfaces last-boot date and pre-selects only the genuinely stale ones.</p>
+        <p>What it is: every simulated device you have ever created, including the dozen Xcode auto-spawns the first time you use a new iOS version. Each device has its own <code>data</code> directory which can accumulate gigabytes of test app sandboxes, screenshots, and Core Data stores.</p>
+        <p>Safe to delete? <strong>Yes for devices not booted in 90+ days.</strong> Same caveat as runtimes, these delete permanently via <code>xcrun simctl delete &lt;uuid&gt;</code>, not to Trash. Aguacatech surfaces last-boot date and pre-selects only the genuinely stale ones.</p>
 
         <h2>The realistic order to clean</h2>
         <ol>
             <li><strong>Quit Xcode.</strong> Non-negotiable for DerivedData and runtime operations.</li>
-            <li><strong>DerivedData + Xcode Caches</strong> — the no-think wins. 5–30 GB on most Macs.</li>
-            <li><strong>Old iOS DeviceSupport majors</strong> — anything before the current iOS version is fair game if you don't debug on those devices anymore.</li>
-            <li><strong>Simulator Runtimes not used in 90+ days</strong> — usually the biggest single line item. 30–70 GB.</li>
-            <li><strong>Simulator Devices not booted in 90+ days</strong> — 1–10 GB of accumulated test app state.</li>
-            <li><strong>Archives older than 6 months for shipped apps</strong> — only after you have confirmed the dSYMs are in App Store Connect.</li>
+            <li><strong>DerivedData + Xcode Caches</strong>, the no-think wins. 5–30 GB on most Macs.</li>
+            <li><strong>Old iOS DeviceSupport majors</strong>, anything before the current iOS version is fair game if you don't debug on those devices anymore.</li>
+            <li><strong>Simulator Runtimes not used in 90+ days</strong>, usually the biggest single line item. 30–70 GB.</li>
+            <li><strong>Simulator Devices not booted in 90+ days</strong>, 1–10 GB of accumulated test app state.</li>
+            <li><strong>Archives older than 6 months for shipped apps</strong>, only after you have confirmed the dSYMs are in App Store Connect.</li>
         </ol>
 
         <div class="post-callout">
             <h4>From the field</h4>
-            <p>On my own M3 Max with two shipping projects and a habit of trying every Xcode beta, this sequence has freed between 60 and 110 GB every quarter for two years running. The single best step has always been Simulator Runtimes — by a wide margin.</p>
+            <p>On my own M3 Max with two shipping projects and a habit of trying every Xcode beta, this sequence has freed between 60 and 110 GB every quarter for two years running. The single best step has always been Simulator Runtimes, by a wide margin.</p>
         </div>
 
         <h2>What we deliberately do not touch (yet)</h2>
@@ -103,10 +103,10 @@
             <li><strong>Swift Package Manager caches</strong> at <code>~/Library/Caches/org.swift.swiftpm</code>. Smaller but real.</li>
             <li><strong>Carthage</strong> (yes, still). <code>~/Library/Caches/org.carthage.CarthageKit</code>.</li>
         </ul>
-        <p>These will land in a future Aguacatech build. Today, if you want to clean them, a one-liner <code>rm -rf</code> on those paths is safe — they all rebuild on next use.</p>
+        <p>These will land in a future Aguacatech build. Today, if you want to clean them, a one-liner <code>rm -rf</code> on those paths is safe, they all rebuild on next use.</p>
 
         <h2>One last thing</h2>
-        <p>Path-based items in the Aguacatech Xcode Cleanup tab (DerivedData, Xcode Caches, Archives, iOS DeviceSupport) all move to Trash via <code>FileManager.trashItem</code>. Finder → Put Back works if you change your mind. Only the two Simulator categories — runtimes and devices — delete permanently, because they are managed by <code>simctl</code> rather than the filesystem. Aguacatech shows a pre-clean sheet that lists every runtime and device by name and version before committing.</p>
+        <p>Path-based items in the Aguacatech Xcode Cleanup tab (DerivedData, Xcode Caches, Archives, iOS DeviceSupport) all move to Trash via <code>FileManager.trashItem</code>. Finder → Put Back works if you change your mind. Only the two Simulator categories, runtimes and devices, delete permanently, because they are managed by <code>simctl</code> rather than the filesystem. Aguacatech shows a pre-clean sheet that lists every runtime and device by name and version before committing.</p>
 
         <div class="post-end">
             <p>Xcode Cleanup ships in <strong>Aguacatech Pro</strong>, $29 one-time. Most dev Macs free 30–100 GB on the first run.</p>

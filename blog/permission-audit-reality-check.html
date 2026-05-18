@@ -50,8 +50,8 @@
         <h2>What TCC actually is</h2>
         <p>Two SQLite databases:</p>
         <ul>
-            <li><code>~/Library/Application Support/com.apple.TCC/TCC.db</code> — your user-level grants.</li>
-            <li><code>/Library/Application Support/com.apple.TCC/TCC.db</code> — system-level grants (admin-installed apps).</li>
+            <li><code>~/Library/Application Support/com.apple.TCC/TCC.db</code>, your user-level grants.</li>
+            <li><code>/Library/Application Support/com.apple.TCC/TCC.db</code>, system-level grants (admin-installed apps).</li>
         </ul>
         <p>Each grant is a row. Service column says which permission (<code>kTCCServiceAccessibility</code>, <code>kTCCServiceScreenCapture</code>, <code>kTCCServiceCamera</code>, …). Client column says which app (bundle ID or path). A status column says granted/denied/prompt.</p>
         <p>That's the whole privacy model. macOS shows you a panel-per-permission view in System Settings, with each panel listing the apps that hold that one grant. There is no panel that shows you all the grants for a single app, and there is no panel that shows you anything as a grid.</p>
@@ -59,16 +59,16 @@
         <h2>The audit</h2>
         <p>I opened Aguacatech's Permission Inspector for the first time on this Mac after running it for nine months. Here is what was on it:</p>
 
-        <h3>Accessibility — 11 apps</h3>
+        <h3>Accessibility, 11 apps</h3>
         <p>Accessibility permission lets an app post synthetic input events and read the contents of other apps. It is the most powerful TCC grant after Full Disk Access. Of the 11 apps on the list:</p>
         <ul>
             <li><strong>3 were justified:</strong> a window manager, a clipboard manager, Aguacatech (for Quick Actions).</li>
             <li><strong>4 were borderline:</strong> two screen recorders I use rarely, a meeting helper, an OCR utility.</li>
             <li><strong>4 were obviously stale:</strong> two automation apps I had stopped using a year ago, one IDE I had uninstalled (the TCC row remained), and one menu-bar app whose name I did not recognize.</li>
         </ul>
-        <p>Stale TCC entries are common. macOS does not garbage-collect them when you uninstall an app — and the Aguacatech Permission Inspector marks them with an <em>Unknown</em> signer because the binary is gone. Those are the easiest to clean up: nothing left to break.</p>
+        <p>Stale TCC entries are common. macOS does not garbage-collect them when you uninstall an app, and the Aguacatech Permission Inspector marks them with an <em>Unknown</em> signer because the binary is gone. Those are the easiest to clean up: nothing left to break.</p>
 
-        <h3>Screen Recording — 4 apps</h3>
+        <h3>Screen Recording, 4 apps</h3>
         <p>Includes <em>"can capture the contents of any window on your screen, including your password manager"</em>. The four:</p>
         <ul>
             <li>Screen recorder I use weekly: keep.</li>
@@ -77,18 +77,18 @@
             <li>A clipboard manager that I did not realise had Screen Recording: revoke.</li>
         </ul>
 
-        <h3>Full Disk Access — 8 apps</h3>
-        <p>Full Disk Access is the strongest TCC grant. Five of mine were tools I had installed and reviewed (Time Machine app, two backup tools, a duplicate finder I had since replaced, Aguacatech itself for the Permission Inspector). The other three were apps I had granted FDA to during onboarding without thinking — none of them needed it for their primary function. Revoked all three; nothing broke.</p>
+        <h3>Full Disk Access, 8 apps</h3>
+        <p>Full Disk Access is the strongest TCC grant. Five of mine were tools I had installed and reviewed (Time Machine app, two backup tools, a duplicate finder I had since replaced, Aguacatech itself for the Permission Inspector). The other three were apps I had granted FDA to during onboarding without thinking, none of them needed it for their primary function. Revoked all three; nothing broke.</p>
 
-        <h3>Camera and Microphone — too long to list</h3>
-        <p>Every video meeting app, every screen recorder, every dictation tool. Most of these are justified. I left them alone, but turned on the Webcam/Mic Activation Log — which appends a row every time the camera or mic actually fires, with the responsible PID. The next month was instructive: two apps I had not used in weeks were briefly grabbing the mic on launch. One had a config I could disable; the other I just uninstalled.</p>
+        <h3>Camera and Microphone, too long to list</h3>
+        <p>Every video meeting app, every screen recorder, every dictation tool. Most of these are justified. I left them alone, but turned on the Webcam/Mic Activation Log, which appends a row every time the camera or mic actually fires, with the responsible PID. The next month was instructive: two apps I had not used in weeks were briefly grabbing the mic on launch. One had a config I could disable; the other I just uninstalled.</p>
 
-        <h3>Automation — long tail of cruft</h3>
+        <h3>Automation, long tail of cruft</h3>
         <p>Automation grants are <em>(app, target app)</em> pairs. Aguacatech itself was authorised to drive 17 different apps from various AppleScript tool calls over the months. Most were fine. A few were apps I had uninstalled. The deep links in Aguacatech's Permission Inspector take you straight to the right pane in System Settings, so revocations are one click each.</p>
 
         <h2>Why System Settings can't do this</h2>
-        <p>Apple's design priority for the privacy panel is to make per-permission policy clear. Their UI is structured around the question "which apps can record my screen?" — which is a fine question. But the more important question, on the user side, is "what permissions does <em>this one app</em> have, and are they all justified?". You cannot answer that without clicking through 18 separate panes and assembling the answer in your head.</p>
-        <p>An audit grid is the right shape: apps as rows, permissions as columns, granted permissions as a dot you can scan. Aguacatech reads the TCC.db files directly and renders that. It needs Full Disk Access to do it — macOS protects TCC.db like any other privacy database — and it never writes to TCC. macOS doesn't allow third-party apps to revoke TCC grants programmatically; only the user can, through System Settings. Aguacatech deep-links you to the right pane for each grant. Toggle off, come back, hit Refresh.</p>
+        <p>Apple's design priority for the privacy panel is to make per-permission policy clear. Their UI is structured around the question "which apps can record my screen?", which is a fine question. But the more important question, on the user side, is "what permissions does <em>this one app</em> have, and are they all justified?". You cannot answer that without clicking through 18 separate panes and assembling the answer in your head.</p>
+        <p>An audit grid is the right shape: apps as rows, permissions as columns, granted permissions as a dot you can scan. Aguacatech reads the TCC.db files directly and renders that. It needs Full Disk Access to do it, macOS protects TCC.db like any other privacy database, and it never writes to TCC. macOS doesn't allow third-party apps to revoke TCC grants programmatically; only the user can, through System Settings. Aguacatech deep-links you to the right pane for each grant. Toggle off, come back, hit Refresh.</p>
 
         <div class="post-callout">
             <h4>Run the audit yourself</h4>
