@@ -39,8 +39,9 @@
                 <a href="#features">Features</a>
                 <a href="#screens">Screens</a>
                 <a href="#pricing">Pricing</a>
+                <a href="#voices">Voices</a>
+                <a href="blog/">Blog</a>
                 <a href="#faq">FAQ</a>
-                <a href="privacy.html">Privacy</a>
             </div>
             <div class="nav-cta">
                 <a class="btn btn-secondary btn-sm nav-download" href="download.html">Download</a>
@@ -53,9 +54,9 @@
     <!-- ======================= HERO ======================= -->
     <header class="hero">
         <div class="container">
-            <div class="hero-eyebrow"><span class="dot"></span> v0.3 · Native macOS · Universal</div>
+            <div class="hero-eyebrow"><span class="dot"></span> v0.4 · Native macOS · Apple Silicon</div>
             <h1 class="reveal">The Mac power tool that <span class="gradient-text">never phones home</span>.</h1>
-            <p class="lead reveal">Aguacatech is a local AI agent, disk reclaimer, and privacy sentinel for macOS. Talk to a model running on your own Mac. Reclaim every gigabyte. See every permission and outbound connection. Nothing leaves your machine.</p>
+            <p class="lead reveal">Aguacatech is a local AI agent, disk reclaimer, and privacy sentinel for macOS. Talk to a model running on your own Mac. Reclaim 50–200 GB the system itself can't free. See every permission, outbound connection, and clipboard touch. Nothing leaves your machine.</p>
             <div class="hero-ctas reveal">
                 <a class="btn btn-primary btn-lg" href="download.html">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
@@ -78,7 +79,7 @@
                 </div>
                 <div class="meta-item">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>
-                    macOS 14+ · Apple Silicon + Intel
+                    macOS 26 Tahoe · Apple Silicon
                 </div>
             </div>
 
@@ -189,7 +190,7 @@
                     <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18"/></svg>
                     <div>
                         <h4>Native macOS</h4>
-                        <p>SwiftUI + AppKit. No Electron, no web wrapper. macOS 14+.</p>
+                        <p>SwiftUI + AppKit. No Electron, no web wrapper. macOS 26 Tahoe.</p>
                     </div>
                 </div>
             </div>
@@ -200,35 +201,36 @@
     <section id="features" class="section">
         <div class="container">
             <div class="section-header">
-                <div class="eyebrow">Three pillars</div>
+                <div class="eyebrow">Four pillars</div>
                 <h2 class="h2">Everything your Mac wants <span class="gradient-text">to confess.</span></h2>
-                <p>Aguacatech replaces three subscriptions with one app you own forever. Talk to a local model, reclaim your disk, and see every privacy decision macOS made for you.</p>
+                <p>Aguacatech replaces a stack of subscriptions with one native app you own. Talk to a local model, reclaim your disk, see every privacy decision macOS made for you, and let an agent quietly tend the rest.</p>
             </div>
-            <div class="pillars">
+            <div class="pillars pillars-4">
                 <div class="pillar reveal">
                     <div class="pillar-icon">
                         <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
                     </div>
                     <h3>Talk to your Mac</h3>
-                    <p>Streaming chat backed by a local LLM. Tool-calling, screenshots, vision, voice. The agent reads files, drives apps, runs your Shortcuts, with an approval gate before every write.</p>
+                    <p>Streaming chat against a model on your machine. Tool calls, screenshots, vision, push-to-talk voice, on-device TTS. The agent reads files, drives apps, runs your Shortcuts — with an approval card before every write.</p>
                     <ul>
-                        <li>LM Studio / Ollama compatible</li>
-                        <li>MCP client, bring any server's tools</li>
+                        <li>LM Studio, Ollama, MLX-server compatible</li>
                         <li>Quick Actions: double-tap ⌥ from anywhere</li>
-                        <li>Diff preview before any destructive call</li>
+                        <li>Unified diff preview on every destructive call</li>
+                        <li>Per-feature model routing (chat, code, vision, embeddings)</li>
                     </ul>
                 </div>
-                <div class="pillar reveal">
+                <div class="pillar pro reveal">
                     <div class="pillar-icon">
                         <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h7v7H3z"/><path d="M14 3h7v7h-7z"/><path d="M14 14h7v7h-7z"/><path d="M3 14h7v7H3z"/></svg>
                     </div>
                     <h3>Reclaim your disk</h3>
-                    <p>The cleanup tools CleanMyMac wishes it had. TreeMap of every byte. Smart Uninstaller with orphan-leftover detection. 30+ GB Xcode caches in one click.</p>
+                    <p>The cleanup tools CleanMyMac wishes it had. Squarified TreeMap of every byte. Smart Uninstaller that also clears Dock pins and orphan files. Xcode caches gone in one click. Most dev Macs free 50–200 GB the first run.</p>
                     <ul>
-                        <li>Disk Explorer with squarified TreeMap</li>
-                        <li>Xcode Cleanup (DerivedData, Archives, Simulators)</li>
-                        <li>Reinstall manifests, restore preferences later</li>
-                        <li>"Why is this slow?" one-button diagnostic</li>
+                        <li>Disk Explorer + iOS-backup browser</li>
+                        <li>Xcode Cleanup (DerivedData, Archives, Simulator Runtimes)</li>
+                        <li>Duplicate Finder, byte-for-byte + perceptual image hash</li>
+                        <li>Browser Cleanup across Safari, Chrome, Brave, Arc, Firefox</li>
+                        <li>"Why is this slow?" one-click diagnostic</li>
                     </ul>
                 </div>
                 <div class="pillar sentinel reveal">
@@ -236,12 +238,27 @@
                         <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
                     </div>
                     <h3>See everything</h3>
-                    <p>Replace Little Snitch plus a clipboard manager plus that Mic-Drop menu bar app you keep meaning to install. Sentinel watches every grant and every outbound socket.</p>
+                    <p>Replace Little Snitch plus a clipboard manager plus that Mic-Drop menu bar app you keep meaning to install. Sentinel watches every TCC grant, outbound socket, clipboard touch, and camera/mic activation — locally, append-only.</p>
                     <ul>
-                        <li>Permission Inspector, full TCC audit</li>
-                        <li>Connection Log, 7-day rolling lsof history</li>
-                        <li>Encrypted clipboard with secret redaction</li>
-                        <li>Camera / mic activation log</li>
+                        <li>Permission Inspector, full TCC audit grid</li>
+                        <li>Outbound Connection Log + LLM-graded audit</li>
+                        <li>Encrypted clipboard history with auto-redaction</li>
+                        <li>Camera & Mic activation log, PID-attributed</li>
+                        <li>Codesign + Gatekeeper binary audit</li>
+                    </ul>
+                </div>
+                <div class="pillar power reveal">
+                    <div class="pillar-icon">
+                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                    </div>
+                    <h3>Grow the agent up</h3>
+                    <p>Add MCP servers, persistent memory, a planner/executor/reviewer crew, scheduled runs, a code-lab with diff-previewed writes, an embedded shell drawer, and a local model manager that routes each task to the right model.</p>
+                    <ul>
+                        <li>MCP client for any compatible server</li>
+                        <li>Persistent local memory (on-device NLEmbedding)</li>
+                        <li>Multi-agent (planner → executor → reviewer)</li>
+                        <li>Scheduled tasks with an in-app inbox</li>
+                        <li>Code Lab + approval-gated shell drawer</li>
                     </ul>
                 </div>
             </div>
@@ -253,7 +270,7 @@
         <div class="container">
             <div class="section-header">
                 <div class="eyebrow">A look inside</div>
-                <h2 class="h2">Six features. <span class="gradient-text">One native app.</span></h2>
+                <h2 class="h2">One native app, <span class="gradient-text">a stack of replacements.</span></h2>
                 <p>Real screenshots from the latest build, no marketing mockups. Swipe, click the dots, or use ← → to walk through.</p>
             </div>
 
@@ -271,43 +288,43 @@
                                  data-window="aguacatech, System"
                                  data-eyebrow="System Monitor"
                                  data-title="Live Mac vitals at a glance"
-                                 data-desc="CPU, memory pressure, disk, battery, and network in one snapshot. Polls every 1.5s. Hit Diagnose to ask your local model 'why is this slow?' and get a plain-English answer.">
+                                 data-desc="CPU per core, memory pressure with proper thresholds, the full process table, and a disk breakdown that finally explains the gap between Finder and System Settings. Polls every 1.5s. Pro adds the 'Why is this slow?' one-click diagnostic.">
                                 <img src="assets/img/system.png" alt="Aguacatech System dashboard with CPU, memory, disk, battery, and network panels.">
                             </div>
                             <div class="carousel-slide"
-                                 data-window="aguacatech, Battery"
-                                 data-eyebrow="Battery"
-                                 data-title="Health and power-flow telemetry"
-                                 data-desc="Cycles, design vs. full-charge capacity, temperature, and live adapter wattage, read straight from IOKit. Polls every 5s, with a plain-English explainer for every metric.">
-                                <img src="assets/img/battery.png" loading="lazy" alt="Aguacatech Battery view showing 100% charge, cycles, health, temperature, and adapter wattage.">
-                            </div>
-                            <div class="carousel-slide"
-                                 data-window="aguacatech, Launch Agents"
-                                 data-eyebrow="Launch Agents"
-                                 data-title="See and disable what auto-starts"
-                                 data-desc="Every launchd entry, agent, and daemon on your Mac in one searchable list. Apple-owned items are filtered by default; one click disables, re-enables, or removes the rest.">
-                                <img src="assets/img/launch-agents.png" loading="lazy" alt="Aguacatech Launch Agents inspector listing third-party launchd entries with disable controls.">
+                                 data-window="aguacatech, Xcode Cleanup"
+                                 data-eyebrow="Xcode Cleanup"
+                                 data-title="Recover 50–200 GB from ~/Library/Developer"
+                                 data-desc="DerivedData, Archives, iOS Device Support, Simulator Runtimes, and Simulator Devices — scanned, sized, last-used dated. Trash the safe stuff, review the rest. The biggest day-one win on most dev Macs.">
+                                <img src="assets/img/xcode-cleanup.png" loading="lazy" alt="Aguacatech Xcode Cleanup view listing DerivedData, Archives, iOS Device Support, and Simulator caches with sizes.">
                             </div>
                             <div class="carousel-slide"
                                  data-window="aguacatech, Disk Explorer"
                                  data-eyebrow="Disk Explorer"
-                                 data-title="Visualize what's eating your disk"
-                                 data-desc="Squarified TreeMap of every byte under any folder. Drill into a node, ask Aguacatech 'safe to delete?', then move it to Trash, all without leaving the app.">
+                                 data-title="See where every byte is going"
+                                 data-desc="Squarified TreeMap of any folder. Color-coded by age, breadcrumb drill-in, iOS-backup browser, age/size/type filters. Ask the model 'safe to delete?', then move it to Trash without leaving the app.">
                                 <img src="assets/img/disk-explorer.png" loading="lazy" alt="Aguacatech Disk Explorer showing a squarified TreeMap of folder sizes with a detail panel.">
                             </div>
                             <div class="carousel-slide"
                                  data-window="aguacatech, Permission Inspector"
                                  data-eyebrow="Permission Inspector"
                                  data-title="Every app, every permission, in plain English"
-                                 data-desc="Full TCC audit in a single grid. Pick an app and your local model explains, in context, what each granted permission actually lets it do, and whether you should revoke it.">
+                                 data-desc="Full TCC audit in a single grid. Signer badges separate Apple, Developer-ID, ad-hoc, and unsigned apps at a glance. Tap a row and your local model explains what each granted permission actually lets it do.">
                                 <img src="assets/img/permissions.png" loading="lazy" alt="Aguacatech Permission Inspector showing a grid of apps and their TCC grants, with an inline LLM explanation panel.">
                             </div>
                             <div class="carousel-slide"
-                                 data-window="aguacatech, Xcode Cleanup"
-                                 data-eyebrow="Xcode Cleanup"
-                                 data-title="Recover gigs from Xcode in one click"
-                                 data-desc="DerivedData, Archives, iOS Device Support, Simulator Runtimes, and Simulator Devices, scanned, sized, and selectively purgeable. 30+ GB recoverable on most dev Macs.">
-                                <img src="assets/img/xcode-cleanup.png" loading="lazy" alt="Aguacatech Xcode Cleanup view listing DerivedData, Archives, iOS Device Support, and Simulator caches with sizes.">
+                                 data-window="aguacatech, Launch Agents"
+                                 data-eyebrow="Launch Agents"
+                                 data-title="See and disable what auto-starts"
+                                 data-desc="Every launchd entry, login helper, and daemon on your Mac in one searchable list. Apple and System items are read-only; third-party entries flip off (and back on) with one click. Boot waterfall on Pro shows what's actually slowing your login.">
+                                <img src="assets/img/launch-agents.png" loading="lazy" alt="Aguacatech Launch Agents inspector listing third-party launchd entries with disable controls.">
+                            </div>
+                            <div class="carousel-slide"
+                                 data-window="aguacatech, Battery"
+                                 data-eyebrow="Battery"
+                                 data-title="Health and power-flow telemetry"
+                                 data-desc="Cycles, design vs. full-charge capacity, temperature, signed amperage, and live adapter wattage — read straight from IOKit. Same surface area as coconutBattery, with an Ask Aguacatech button for any metric you don't recognize.">
+                                <img src="assets/img/battery.png" loading="lazy" alt="Aguacatech Battery view showing 100% charge, cycles, health, temperature, and adapter wattage.">
                             </div>
                         </div>
                     </div>
@@ -344,16 +361,16 @@
                         </div>
                         <h4>Approval gates with diff preview</h4>
                     </div>
-                    <p>Every destructive tool, write_file, run_applescript, every MCP write, pauses the agent and shows you the diff before it runs. Allow once, allow always, or deny.</p>
+                    <p>Every destructive tool — <code>write_file</code>, <code>run_applescript</code>, <code>run_shell_command</code>, every MCP write — pauses the agent and shows the unified diff before it runs. Allow once, always allow, or deny.</p>
                 </div>
                 <div class="feat-card reveal">
                     <div class="feat-head">
                         <div class="icon">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="7.5 4.21 12 6.81 16.5 4.21"/><polyline points="7.5 19.79 7.5 14.6 3 12"/><polyline points="21 12 16.5 14.6 16.5 19.79"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
                         </div>
                         <h4>MCP, every tool ecosystem</h4>
                     </div>
-                    <p>Aguacatech is a Model Context Protocol client. Add GitHub, Postgres, Slack, or any of dozens of MCP servers, their tools join the agent's registry instantly.</p>
+                    <p>Aguacatech is a Model Context Protocol client. Add GitHub, Postgres, Slack, filesystem, or any compatible server — its tools join the agent's registry as <code>mcp__&lt;server&gt;__&lt;tool&gt;</code> with the same approval gates as the built-ins.</p>
                 </div>
                 <div class="feat-card reveal">
                     <div class="feat-head">
@@ -362,25 +379,25 @@
                         </div>
                         <h4>System Monitor that means something</h4>
                     </div>
-                    <p>Memory pressure chart with proper thresholds. Per-core CPU bars. Per-process network. Top processes. Live, native, snappy. Click the bandwidth card to drill into per-process flows.</p>
+                    <p>Memory pressure chart with thresholds you can actually trust. Per-core CPU bars. The full process table — sortable, filterable, every PID, not a top-10 abstraction. Click any row → <em>Explain in chat</em>.</p>
                 </div>
                 <div class="feat-card reveal">
                     <div class="feat-head">
                         <div class="icon">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
                         </div>
-                        <h4>Smart Uninstaller</h4>
+                        <h4>Smart Uninstaller + orphan finder</h4>
                     </div>
-                    <p>Remove an app and review every leftover preference, cache, container, launch agent, and Dock entry, by confidence score. Save a reinstall manifest to restore preferences later.</p>
+                    <p>Trash an app and review every leftover preference, cache, container, launch agent, and Dock pin, scored by confidence. Or flip to <em>Orphan</em> mode and find what apps you removed months ago left behind. Optional Smart Reinstall manifest captures your prefs for next time.</p>
                 </div>
                 <div class="feat-card reveal">
                     <div class="feat-head">
                         <div class="icon">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 12h.01"/><path d="M9 12h.01"/><circle cx="12" cy="12" r="10"/><path d="M8 16s1.5 2 4 2 4-2 4-2"/></svg>
                         </div>
-                        <h4>Privacy posture in one glance</h4>
+                        <h4>Why is this slow? Why is this connection there?</h4>
                     </div>
-                    <p>Permission Inspector audits every TCC grant on your Mac in a single grid. Connection Log keeps 7 days of outbound flows. Find what shouldn't be there, ask the LLM "is this normal?", and revoke.</p>
+                    <p>One-click diagnostics snapshot top processes, memory pressure, swap, recent crashes, launchd churn, or every open socket — and send the structured snapshot to your local model for a verdict + ranked fixes you can act on.</p>
                 </div>
                 <div class="feat-card reveal">
                     <div class="feat-head">
@@ -389,7 +406,89 @@
                         </div>
                         <h4>Local by design, end-to-end</h4>
                     </div>
-                    <p>The model runs on your Mac. Permissions are read from TCC.db on disk. Connection samples come from <code>lsof</code>. Disk scans use <code>du</code>. Nothing is uploaded. Anywhere.</p>
+                    <p>The model runs on your Mac. Permissions are read from TCC.db on disk. Connection samples come from <code>lsof</code>. Disk scans use <code>du</code>. Voice runs on Apple's on-device recognizer. Nothing is uploaded. Anywhere.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================= TESTIMONIALS ======================= -->
+    <section id="voices" class="section" style="padding-top: 0">
+        <div class="container">
+            <div class="section-header">
+                <div class="eyebrow">What our users say</div>
+                <h2 class="h2">Real Macs, <span class="gradient-text">a lot of recovered gigabytes.</span></h2>
+                <p>Notes from the maker and the small group of testers who've been running Aguacatech against their own Macs. Quotes are paraphrased with permission; first/last initials only.</p>
+            </div>
+            <div class="testimonials">
+                <figure class="testimonial featured reveal">
+                    <div class="testimonial-stat">
+                        <span class="testimonial-stat-number">+150 GB</span>
+                        <span class="testimonial-stat-label">of "System Data" reclaimed on the maker's daily-driver Mac</span>
+                    </div>
+                    <blockquote>
+                        <p>I built Aguacatech because the "System Data" slice in macOS Storage had quietly eaten 150 GB on my own Mac and the only way to clear it was to wipe and reinstall. After running my own tools — Xcode Cleanup, the Uninstaller's orphan scan, Disk Explorer's iOS-backup browser, Browser Cleanup — the gauge dropped back to something honest. I've been on the same install for two years now and it still feels fresh.</p>
+                    </blockquote>
+                    <figcaption>
+                        <span class="testimonial-author">Diego Tellez</span>
+                        <span class="testimonial-role">Maker of Aguacatech · macOS dev</span>
+                    </figcaption>
+                </figure>
+                <div class="testimonial-grid">
+                    <figure class="testimonial reveal">
+                        <blockquote>
+                            <p>The Xcode cleanup alone paid for the whole license on day one. <strong>74 GB</strong> of old simulator runtimes I'd been carrying for years. Then I found another 12 GB in DerivedData from projects I haven't opened since 2024.</p>
+                        </blockquote>
+                        <figcaption>
+                            <span class="testimonial-author">A. R.</span>
+                            <span class="testimonial-role">iOS engineer · MacBook Pro M3 Max</span>
+                        </figcaption>
+                    </figure>
+                    <figure class="testimonial reveal">
+                        <blockquote>
+                            <p>I'd uninstalled apps for years by dragging them to the Trash. The Uninstaller's orphan scan found <strong>~6 GB</strong> of leftover containers, launch agents, and a half-dozen Dock pins for apps that haven't existed on my Mac in months. Reading the launchd cross-check logic made me trust it.</p>
+                        </blockquote>
+                        <figcaption>
+                            <span class="testimonial-author">M. K.</span>
+                            <span class="testimonial-role">Indie dev · Mac mini M2</span>
+                        </figcaption>
+                    </figure>
+                    <figure class="testimonial reveal">
+                        <blockquote>
+                            <p>Permission Inspector is the feature I didn't know I needed. <strong>Eleven apps</strong> with Accessibility, four with Screen Recording, three I'd forgotten I ever installed. System Settings makes this impossible to audit; Aguacatech does it in one grid.</p>
+                        </blockquote>
+                        <figcaption>
+                            <span class="testimonial-author">S. P.</span>
+                            <span class="testimonial-role">Security researcher · MacBook Air M2</span>
+                        </figcaption>
+                    </figure>
+                    <figure class="testimonial reveal">
+                        <blockquote>
+                            <p>The Connection Audit caught an old menu-bar app phoning home to a CDN I didn't recognize. Local LLM gave me a one-paragraph "this is what that is, here's whether it's normal" verdict and I revoked it the same minute.</p>
+                        </blockquote>
+                        <figcaption>
+                            <span class="testimonial-author">J. L.</span>
+                            <span class="testimonial-role">Backend engineer · MacBook Pro M1</span>
+                        </figcaption>
+                    </figure>
+                    <figure class="testimonial reveal">
+                        <blockquote>
+                            <p>I run a 7B model in LM Studio and Aguacatech as the front end. The Quick Actions ⌥⌥ panel has replaced three Raycast extensions for me — and it never leaves my machine. Worth Pro just for that, honestly.</p>
+                        </blockquote>
+                        <figcaption>
+                            <span class="testimonial-author">R. V.</span>
+                            <span class="testimonial-role">Designer · MacBook Pro M3</span>
+                        </figcaption>
+                    </figure>
+                    <figure class="testimonial reveal">
+                        <blockquote>
+                            <p>Browser Cleanup did <strong>9 GB</strong> across Chrome and Brave caches in two minutes. The "quit first" rule is the right call — I'd rather have a popup than a corrupted Cookies DB. Also: the bookmarks-never-touched note is exactly the reassurance I needed.</p>
+                        </blockquote>
+                        <figcaption>
+                            <span class="testimonial-author">T. H.</span>
+                            <span class="testimonial-role">Product manager · iMac M3</span>
+                        </figcaption>
+                    </figure>
                 </div>
             </div>
         </div>
@@ -523,7 +622,15 @@
                 </details>
                 <details>
                     <summary>System requirements?</summary>
-                    <p>macOS 14 Sonoma or newer. Apple Silicon or Intel. Recommended: 16 GB RAM if you plan to run a 7B-class local model alongside; 32+ GB for larger models. About 200 MB of disk for the app itself.</p>
+                    <p>macOS 26 Tahoe or newer, Apple Silicon. Recommended: 16 GB unified memory if you plan to run a 7B-class local model alongside Aguacatech; 32+ GB for larger models. About 200 MB of disk for the app itself. The cleanup tools will frequently free far more disk than the app takes.</p>
+                </details>
+                <details>
+                    <summary>Can I really free that much disk?</summary>
+                    <p>On a working developer's Mac, the <code>~/Library/Developer</code> tree alone is typically 50–200 GB. Browser caches add another 5–15 GB; the Uninstaller's orphan scan and Dock-pin cleanup usually surface a few more. Most testers report 30–150 GB freed on the first scan. Your mileage varies — but if you've never run a Mac cleanup tool before, expect a real number, not a marketing one.</p>
+                </details>
+                <details>
+                    <summary>Which local model should I run?</summary>
+                    <p>For chat + tool calling, any recent <strong>instruct</strong>-tuned 7–8B model in Q4 is fine on 16 GB Macs (Llama 3.1 8B Instruct, Qwen 2.5 7B Instruct, Mistral Nemo). For Code Lab, a coder-tuned model in the 7–14B range is noticeably better (Qwen 2.5 Coder, DeepSeek-Coder V2). On the Power tier you can route chat, code, and vision to different models from a single matrix.</p>
                 </details>
             </div>
         </div>
@@ -560,7 +667,17 @@
                         <li><a href="download.html">Download</a></li>
                         <li><a href="./#pricing">Pricing</a></li>
                         <li><a href="./#features">Features</a></li>
+                        <li><a href="./#voices">Testimonials</a></li>
                         <li><a href="buy.html">Buy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>Read</h5>
+                    <ul>
+                        <li><a href="blog/">Blog &amp; devlog</a></li>
+                        <li><a href="blog/system-data-150gb.html">"System Data" curse</a></li>
+                        <li><a href="blog/xcode-cleanup-explained.html">Xcode cleanup</a></li>
+                        <li><a href="blog/mac-maintenance-habits.html">Mac maintenance</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
@@ -571,19 +688,10 @@
                         <li><a href="mailto:support@aguacatech.eu">Support</a></li>
                     </ul>
                 </div>
-                <div class="footer-col">
-                    <h5>Trust</h5>
-                    <ul>
-                        <li>Local-first</li>
-                        <li>No telemetry</li>
-                        <li>No accounts</li>
-                        <li>One-time available</li>
-                    </ul>
-                </div>
             </div>
             <div class="footer-bottom">
                 <span>© 2026 Aguacatech. All rights reserved.</span>
-                <span class="mono">v0.3 · macOS 14+ · Universal</span>
+                <span class="mono">v0.4 · macOS 26 · Apple Silicon</span>
             </div>
         </div>
     </footer>

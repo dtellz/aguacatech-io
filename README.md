@@ -31,12 +31,20 @@ That's it. There's no Jekyll/Hugo/build pipeline. The `.nojekyll` file disables 
 
 ```
 .
-├── index.html              # Landing: hero, pillars, pricing, FAQ, footer
+├── index.html              # Landing: hero, pillars, screens, testimonials, pricing, FAQ
 ├── buy.html                # Tier cards with PayPal Smart Buttons
 ├── download.html           # DMG download + first-run instructions
 ├── success.html            # Post-payment thank-you (read by PayPal redirect)
 ├── privacy.html            # Privacy policy
 ├── 404.html                # Not found
+├── blog/
+│   ├── index.html                          # Blog listing
+│   ├── system-data-150gb.html              # Story
+│   ├── xcode-cleanup-explained.html        # Guide
+│   ├── uninstaller-vs-cleanmymac.html      # Guide
+│   ├── local-first-ai-devlog.html          # Devlog
+│   ├── mac-maintenance-habits.html         # Guide
+│   └── permission-audit-reality-check.html # Story
 ├── CNAME                   # Custom domain (delete if not using one)
 ├── .nojekyll               # Disable Jekyll on GitHub Pages
 ├── robots.txt
@@ -45,10 +53,20 @@ That's it. There's no Jekyll/Hugo/build pipeline. The `.nojekyll` file disables 
 └── assets/
     ├── css/styles.css      # Full design system + component styles
     ├── js/
-    │   ├── main.js         # Nav, reveal-on-scroll, mobile menu
+    │   ├── main.js         # Nav, reveal-on-scroll, mobile menu, carousel
     │   └── paypal.js       # PayPal Smart Buttons config
     └── img/logo.svg        # Brand mark
 ```
+
+## Adding a blog post
+
+1. Copy any existing post in `blog/` as a starting point.
+2. Change the `<title>`, `<meta name="description">`, OG tags, canonical URL, and `article:published_time` to match.
+3. Pick a tag class for the meta strip: `tag story`, `tag guide`, or `tag devlog`. The same class is used on the listing card in `blog/index.html`.
+4. Add a card to `blog/index.html` (newest first).
+5. Add a `<url>` entry to `sitemap.xml` with `<lastmod>` set to the publish date.
+
+The blog uses the same design tokens as the rest of the site; no extra CSS is needed for a typical post.
 
 ## Going live with PayPal
 

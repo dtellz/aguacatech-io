@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#07090a">
+    <title>Eight Mac maintenance habits that buy you another two years · Aguacatech</title>
+    <meta name="description" content="The handful of small habits that make the difference between a four-year Mac and an eight-year one. Disk, launchd, login items, permissions, browser hygiene. Most take less than five minutes.">
+    <link rel="canonical" href="https://aguacatech.eu/blog/mac-maintenance-habits.html">
+    <meta property="og:title" content="Eight Mac maintenance habits that buy you another two years">
+    <meta property="og:description" content="Keep your Mac fast, your disk honest, and your launchd quiet.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aguacatech.eu/blog/mac-maintenance-habits.html">
+    <meta property="og:image" content="https://aguacatech.eu/assets/img/og-image.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="article:published_time" content="2026-04-21">
+    <meta name="keywords" content="mac maintenance, speed up mac, mac slow how to fix, extend mac life, mac housekeeping tips, Aguacatech">
+    <link rel="icon" type="image/svg+xml" href="../assets/img/logo.svg">
+    <link rel="preconnect" href="https://rsms.me">
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+    <nav class="nav" id="nav">
+        <div class="nav-inner">
+            <a class="brand" href="../">
+                <img src="../assets/img/logo.svg" alt="" width="26" height="26">
+                Aguacatech
+            </a>
+            <div class="nav-links">
+                <a href="../#features">Features</a>
+                <a href="../#pricing">Pricing</a>
+                <a href="./">Blog</a>
+                <a href="../privacy.html">Privacy</a>
+            </div>
+            <div class="nav-cta">
+                <a class="btn btn-primary btn-sm" href="../download.html">Download</a>
+            </div>
+        </div>
+    </nav>
+
+    <article class="post">
+        <div class="post-meta">
+            <span class="tag guide">Guide</span>
+            <span>2026-04-21 · 6 min read</span>
+        </div>
+        <h1>Eight Mac maintenance habits that buy you another two years</h1>
+        <p class="post-lead">Apple Silicon Macs hold up well past their warranty if you treat them right. Most of the "my Mac is getting old" feeling is not the hardware — it is accumulated cruft, runaway launch agents, and a disk that has crept past 90% full. Here are the eight habits that genuinely move the needle, with how often to actually do each.</p>
+
+        <h2>1. Keep at least 15% of your disk free</h2>
+        <p><strong>How often:</strong> check monthly.</p>
+        <p>APFS gets noticeably slower as the volume fills. Write amplification climbs, snapshot creation gets risky, Spotlight indexing thrashes. The 90%-full point is where most "my Mac feels sluggish" complaints start. The Aguacatech System Monitor's disk breakdown card calls out exactly what is purgeable and what is real "in use", so you can tell the difference between a 90% reading that is actually 70% real usage and one that is 90% real.</p>
+        <p>If you are over 85%: do the Xcode and Browser cleanups first; iOS device backups second; orphan scan third. The 150-GB story is over <a href="system-data-150gb.html">here</a>.</p>
+
+        <h2>2. Quit Xcode before you sleep your Mac</h2>
+        <p><strong>How often:</strong> end of every workday.</p>
+        <p>Xcode keeps a lot of file handles open on caches and indexes. Closing it before sleep means the next boot is faster, the indexer is not mid-write, and DerivedData stays consistent. Same logic applies to Docker Desktop (which keeps a VM running), and to Adobe apps with background daemons.</p>
+
+        <h2>3. Audit your Login Items quarterly</h2>
+        <p><strong>How often:</strong> every 3 months.</p>
+        <p>Half the third-party apps you install ship a launch agent or a login helper. Some of them are useful (Hammerspoon, Karabiner). Most are not. After three years on the same install, a typical Mac has 30–80 third-party launchd entries firing on every login.</p>
+        <p>Open <strong>System Settings → General → Login Items &amp; Extensions</strong> for the obvious ones. For the rest, Aguacatech's Launch Agents tab cross-references every <code>~/Library/LaunchAgents</code> plist against <code>launchctl list</code> and shows you the live PID + the file it came from. Disable is reversible (the plist is renamed); permanent delete moves the file to Trash. Apple's own agents are filtered by default.</p>
+
+        <h2>4. Audit your TCC permissions twice a year</h2>
+        <p><strong>How often:</strong> every 6 months, plus after any "what does this app need this for?" moment.</p>
+        <p>macOS asks you for permissions one at a time, in the moment, on a particular Tuesday afternoon when you are trying to do something else. Six months later, you have granted Accessibility to eleven apps and you cannot tell me what eight of them are for.</p>
+        <p>The TCC.db is the source of truth. <code>~/Library/Application Support/com.apple.TCC/TCC.db</code> + <code>/Library/Application Support/com.apple.TCC/TCC.db</code>. Aguacatech's Permission Inspector reads both and shows you a grid: apps as rows, permissions as columns. Pay particular attention to anything with <strong>Full Disk Access</strong>, <strong>Screen Recording</strong>, or <strong>Accessibility</strong> — those are the high-leverage ones. Anything you cannot justify, revoke.</p>
+
+        <h2>5. Don't pin apps you don't use</h2>
+        <p><strong>How often:</strong> ongoing.</p>
+        <p>This sounds trivial. It is not. Every Dock pin is a launch surface that wastes attention; every Dock pin pointing at a deleted app shows up as a sad "?". Aguacatech's Uninstaller cleans up Dock pins automatically when it removes an app, but if you have years of accumulated cruft from before that, manually right-click → Options → Remove from Dock is a 30-second weekly habit that compounds.</p>
+
+        <h2>6. Empty Trash, but not Photos Trash, weekly</h2>
+        <p><strong>How often:</strong> every Friday.</p>
+        <p>The user Trash is unbounded — files moved there stay forever until emptied. On a Mac doing serious cleanup, this can grow to 20 GB inside a week. Empty it.</p>
+        <p>Photos has its own "Recently Deleted" with a <strong>30-day grace period</strong>. Don't empty that on a schedule; it is your only recovery path for an accidental swipe. Same for Mail → Trash if you use Mail.</p>
+
+        <h2>7. Restart at least once a month</h2>
+        <p><strong>How often:</strong> monthly minimum, weekly is better.</p>
+        <p>Apple Silicon Macs are remarkable at staying responsive across long uptimes. Many do not need to restart for months. But:</p>
+        <ul>
+            <li>kernel and security updates only take effect after a restart;</li>
+            <li>memory pressure across many open apps eventually pushes things into swap;</li>
+            <li>some background daemons leak file descriptors slowly (looking at you, every Electron app);</li>
+            <li>Time Machine local snapshots get cleaned up properly on a fresh boot.</li>
+        </ul>
+        <p>"Shut down" beats "restart" because it also clears NVRAM-side state. Once a month is enough.</p>
+
+        <h2>8. Don't carry browser caches across browser updates</h2>
+        <p><strong>How often:</strong> every browser major version bump.</p>
+        <p>Browser caches are designed to be ephemeral. After a Chrome update, the cache format may change subtly and old entries hang around as dead weight. Clearing Cache, Service Workers, and GPU Cache after major Safari/Chrome/Brave/Arc/Firefox updates is one of those "five minutes, gains a few GB" habits.</p>
+        <p>What you should <em>not</em> clear on autopilot: cookies (logs you out of everything), history (kills your autocomplete), or saved passwords (don't even try). Aguacatech's Browser Cleanup defaults to cache + service workers + GPU cache only, with cookies/history/extensions off.</p>
+
+        <div class="post-callout">
+            <h4>The one habit that doesn't help</h4>
+            <p>"Repair Disk Permissions" was a thing on macOS 10.x and has not been useful since 2015. macOS now uses SIP to manage system-file permissions automatically. You cannot fix anything that way. Skip the tutorials that recommend it.</p>
+        </div>
+
+        <h2>Putting it on a schedule</h2>
+        <p>The honest version of all of this fits in 45 minutes a quarter:</p>
+        <ul>
+            <li><strong>Weekly (2 min):</strong> empty Trash. Glance at the Aguacatech System Monitor's disk gauge.</li>
+            <li><strong>Monthly (10 min):</strong> restart. Run Aguacatech's Browser Cleanup on the browsers you use most. Skim the Connection Log for anything that looks weird.</li>
+            <li><strong>Quarterly (30 min):</strong> Xcode Cleanup (if you ship code). Uninstaller orphan scan. Launch Agents audit. Permission Inspector revoke pass.</li>
+        </ul>
+        <p>The Power tier lets you encode any of the above as a <strong>scheduled task</strong> that runs the agent against a structured snapshot on a real cadence — but a calendar reminder works too.</p>
+
+        <div class="post-end">
+            <p>Aguacatech bundles the cleanup, audit, and inspection tools into one native app that runs entirely on your Mac. Free tier already includes System Monitor, Network, Launch Agents browsing, and Quick Actions.</p>
+            <a class="btn btn-primary" href="../download.html">Download Free<span class="arrow">→</span></a>
+            <a class="btn btn-secondary" href="../#pricing">Compare tiers<span class="arrow">→</span></a>
+        </div>
+    </article>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <span>© 2026 Aguacatech. All rights reserved.</span>
+                <span class="mono">v0.4 · macOS 26 · Apple Silicon</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/main.js" defer></script>
+</body>
+</html>

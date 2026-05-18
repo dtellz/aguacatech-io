@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#07090a">
+    <title>Blog &amp; devlog · Aguacatech</title>
+    <meta name="description" content="Devlogs, feature deep-dives, and Mac-maintenance recommendations from the makers of Aguacatech, the local-first Mac power tool that never phones home.">
+    <link rel="canonical" href="https://aguacatech.eu/blog/">
+    <meta property="og:title" content="Aguacatech Blog &amp; devlog">
+    <meta property="og:description" content="Devlogs, feature deep-dives, and Mac-maintenance recommendations from the makers of Aguacatech.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://aguacatech.eu/blog/">
+    <meta property="og:image" content="https://aguacatech.eu/assets/img/og-image.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" type="image/svg+xml" href="../assets/img/logo.svg">
+    <link rel="preconnect" href="https://rsms.me">
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+    <nav class="nav" id="nav">
+        <div class="nav-inner">
+            <a class="brand" href="../">
+                <img src="../assets/img/logo.svg" alt="" width="26" height="26">
+                Aguacatech
+            </a>
+            <div class="nav-links">
+                <a href="../#features">Features</a>
+                <a href="../#screens">Screens</a>
+                <a href="../#pricing">Pricing</a>
+                <a href="./">Blog</a>
+                <a href="../privacy.html">Privacy</a>
+            </div>
+            <div class="nav-cta">
+                <a class="btn btn-secondary btn-sm" href="../download.html">Download</a>
+                <a class="btn btn-primary btn-sm" href="../buy.html">Buy<span class="arrow">→</span></a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="blog-hero">
+        <div class="container">
+            <div class="eyebrow">Blog &amp; devlog</div>
+            <h1>Notes on building a Mac that <span class="gradient-text">doesn't phone home.</span></h1>
+            <p>Feature deep-dives, implementation devlogs, and habits that keep a Mac sharp for years past its warranty. Updated as we ship.</p>
+        </div>
+    </section>
+
+    <section class="section" style="padding-top: 32px">
+        <div class="container">
+            <div class="blog-list">
+                <a class="blog-card" href="system-data-150gb.html">
+                    <div class="meta">
+                        <span class="tag story">Story</span>
+                        <span>2026-05-18 · 9 min read</span>
+                    </div>
+                    <h2>How I freed 150 GB from "System Data" on my own Mac</h2>
+                    <p>The infamous storage slice that has no explanation, no UI, and no honest way to clean. Here is what is actually inside it — and how I built Aguacatech to drain it without a wipe-and-reinstall.</p>
+                    <span class="read-more">Read the story <span aria-hidden="true">→</span></span>
+                </a>
+
+                <a class="blog-card" href="xcode-cleanup-explained.html">
+                    <div class="meta">
+                        <span class="tag guide">Guide</span>
+                        <span>2026-05-12 · 7 min read</span>
+                    </div>
+                    <h2>What Xcode actually hoards under <code>~/Library/Developer</code></h2>
+                    <p>DerivedData, Archives, iOS Device Support, Simulator Runtimes, Simulator Devices. The five buckets that quietly eat 50–200 GB on every dev Mac, and which ones are safe to nuke today.</p>
+                    <span class="read-more">Read the guide <span aria-hidden="true">→</span></span>
+                </a>
+
+                <a class="blog-card" href="uninstaller-vs-cleanmymac.html">
+                    <div class="meta">
+                        <span class="tag guide">Guide</span>
+                        <span>2026-05-06 · 8 min read</span>
+                    </div>
+                    <h2>Why the Aguacatech uninstaller cleans more than CleanMyMac (and AppCleaner)</h2>
+                    <p>Dragging an app to the Trash leaves behind 15 standard cleanup directories of cruft, a launchd registration, and an undead Dock pin. Here is how we find each one — and what AppCleaner misses.</p>
+                    <span class="read-more">Read the comparison <span aria-hidden="true">→</span></span>
+                </a>
+
+                <a class="blog-card" href="local-first-ai-devlog.html">
+                    <div class="meta">
+                        <span class="tag devlog">Devlog</span>
+                        <span>2026-04-29 · 11 min read</span>
+                    </div>
+                    <h2>Building a local-first AI agent that genuinely never phones home</h2>
+                    <p>LM Studio's OpenAI-compatible endpoint. Streaming tool calls. Approval gates with unified diffs. Quick Actions via NSEvent double-tap. The architecture choices behind a Mac AI that ships without a SaaS dependency.</p>
+                    <span class="read-more">Read the devlog <span aria-hidden="true">→</span></span>
+                </a>
+
+                <a class="blog-card" href="mac-maintenance-habits.html">
+                    <div class="meta">
+                        <span class="tag guide">Guide</span>
+                        <span>2026-04-21 · 6 min read</span>
+                    </div>
+                    <h2>Eight Mac maintenance habits that buy you another two years</h2>
+                    <p>Keep your Mac fast, your disk honest, and your launchd quiet. The handful of small habits that make the difference between a four-year Mac and an eight-year one — most take less than five minutes.</p>
+                    <span class="read-more">Read the guide <span aria-hidden="true">→</span></span>
+                </a>
+
+                <a class="blog-card" href="permission-audit-reality-check.html">
+                    <div class="meta">
+                        <span class="tag story">Story</span>
+                        <span>2026-04-14 · 5 min read</span>
+                    </div>
+                    <h2>I audited every TCC grant on my Mac. The result was uncomfortable.</h2>
+                    <p>Eleven apps with Accessibility, four with Screen Recording, three with Full Disk Access that I genuinely could not justify. A quick walk through what's in your TCC.db right now, and why System Settings is the wrong tool to clean it up.</p>
+                    <span class="read-more">Read the audit <span aria-hidden="true">→</span></span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <span>© 2026 Aguacatech. All rights reserved.</span>
+                <span class="mono">v0.4 · macOS 26 · Apple Silicon</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/main.js" defer></script>
+</body>
+</html>

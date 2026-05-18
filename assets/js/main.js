@@ -169,6 +169,8 @@
                 <a href="/#features">Features</a>
                 <a href="/#screens">Screens</a>
                 <a href="/#pricing">Pricing</a>
+                <a href="/#voices">Voices</a>
+                <a href="/blog/">Blog</a>
                 <a href="/#faq">FAQ</a>
                 <a href="/privacy.html">Privacy</a>
                 ${isPhone ? '' : '<a href="/download.html">Download</a>'}

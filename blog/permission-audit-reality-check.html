@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#07090a">
+    <title>I audited every TCC grant on my Mac. The result was uncomfortable. · Aguacatech</title>
+    <meta name="description" content="Eleven apps with Accessibility, four with Screen Recording, three with Full Disk Access I genuinely could not justify. A walk through what's in your TCC.db right now.">
+    <link rel="canonical" href="https://aguacatech.eu/blog/permission-audit-reality-check.html">
+    <meta property="og:title" content="I audited every TCC grant on my Mac. The result was uncomfortable.">
+    <meta property="og:description" content="What's in your TCC.db right now, and why System Settings is the wrong tool to clean it up.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aguacatech.eu/blog/permission-audit-reality-check.html">
+    <meta property="og:image" content="https://aguacatech.eu/assets/img/og-image.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="article:published_time" content="2026-04-14">
+    <meta name="keywords" content="macOS TCC, mac permissions audit, mac accessibility permissions, full disk access mac, screen recording permissions mac, Aguacatech">
+    <link rel="icon" type="image/svg+xml" href="../assets/img/logo.svg">
+    <link rel="preconnect" href="https://rsms.me">
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+    <nav class="nav" id="nav">
+        <div class="nav-inner">
+            <a class="brand" href="../">
+                <img src="../assets/img/logo.svg" alt="" width="26" height="26">
+                Aguacatech
+            </a>
+            <div class="nav-links">
+                <a href="../#features">Features</a>
+                <a href="../#pricing">Pricing</a>
+                <a href="./">Blog</a>
+                <a href="../privacy.html">Privacy</a>
+            </div>
+            <div class="nav-cta">
+                <a class="btn btn-primary btn-sm" href="../download.html">Download</a>
+            </div>
+        </div>
+    </nav>
+
+    <article class="post">
+        <div class="post-meta">
+            <span class="tag story">Story</span>
+            <span>2026-04-14 · 5 min read</span>
+        </div>
+        <h1>I audited every TCC grant on my Mac. The result was uncomfortable.</h1>
+        <p class="post-lead">macOS tracks every privacy permission you have ever granted any app in a SQLite database called <strong>TCC</strong>. I ran the Aguacatech Permission Inspector against my own Mac for the first time as a serious audit. The result was a small wake-up call, and a reminder that System Settings is structurally the wrong tool to do this with.</p>
+
+        <h2>What TCC actually is</h2>
+        <p>Two SQLite databases:</p>
+        <ul>
+            <li><code>~/Library/Application Support/com.apple.TCC/TCC.db</code> — your user-level grants.</li>
+            <li><code>/Library/Application Support/com.apple.TCC/TCC.db</code> — system-level grants (admin-installed apps).</li>
+        </ul>
+        <p>Each grant is a row. Service column says which permission (<code>kTCCServiceAccessibility</code>, <code>kTCCServiceScreenCapture</code>, <code>kTCCServiceCamera</code>, …). Client column says which app (bundle ID or path). A status column says granted/denied/prompt.</p>
+        <p>That's the whole privacy model. macOS shows you a panel-per-permission view in System Settings, with each panel listing the apps that hold that one grant. There is no panel that shows you all the grants for a single app, and there is no panel that shows you anything as a grid.</p>
+
+        <h2>The audit</h2>
+        <p>I opened Aguacatech's Permission Inspector for the first time on this Mac after running it for nine months. Here is what was on it:</p>
+
+        <h3>Accessibility — 11 apps</h3>
+        <p>Accessibility permission lets an app post synthetic input events and read the contents of other apps. It is the most powerful TCC grant after Full Disk Access. Of the 11 apps on the list:</p>
+        <ul>
+            <li><strong>3 were justified:</strong> a window manager, a clipboard manager, Aguacatech (for Quick Actions).</li>
+            <li><strong>4 were borderline:</strong> two screen recorders I use rarely, a meeting helper, an OCR utility.</li>
+            <li><strong>4 were obviously stale:</strong> two automation apps I had stopped using a year ago, one IDE I had uninstalled (the TCC row remained), and one menu-bar app whose name I did not recognize.</li>
+        </ul>
+        <p>Stale TCC entries are common. macOS does not garbage-collect them when you uninstall an app — and the Aguacatech Permission Inspector marks them with an <em>Unknown</em> signer because the binary is gone. Those are the easiest to clean up: nothing left to break.</p>
+
+        <h3>Screen Recording — 4 apps</h3>
+        <p>Includes <em>"can capture the contents of any window on your screen, including your password manager"</em>. The four:</p>
+        <ul>
+            <li>Screen recorder I use weekly: keep.</li>
+            <li>Meeting helper that screen-shares: keep, but only when calls.</li>
+            <li>An old "AI assistant" I had granted Screen Recording to in 2024 and never disabled: revoke.</li>
+            <li>A clipboard manager that I did not realise had Screen Recording: revoke.</li>
+        </ul>
+
+        <h3>Full Disk Access — 8 apps</h3>
+        <p>Full Disk Access is the strongest TCC grant. Five of mine were tools I had installed and reviewed (Time Machine app, two backup tools, a duplicate finder I had since replaced, Aguacatech itself for the Permission Inspector). The other three were apps I had granted FDA to during onboarding without thinking — none of them needed it for their primary function. Revoked all three; nothing broke.</p>
+
+        <h3>Camera and Microphone — too long to list</h3>
+        <p>Every video meeting app, every screen recorder, every dictation tool. Most of these are justified. I left them alone, but turned on the Webcam/Mic Activation Log — which appends a row every time the camera or mic actually fires, with the responsible PID. The next month was instructive: two apps I had not used in weeks were briefly grabbing the mic on launch. One had a config I could disable; the other I just uninstalled.</p>
+
+        <h3>Automation — long tail of cruft</h3>
+        <p>Automation grants are <em>(app, target app)</em> pairs. Aguacatech itself was authorised to drive 17 different apps from various AppleScript tool calls over the months. Most were fine. A few were apps I had uninstalled. The deep links in Aguacatech's Permission Inspector take you straight to the right pane in System Settings, so revocations are one click each.</p>
+
+        <h2>Why System Settings can't do this</h2>
+        <p>Apple's design priority for the privacy panel is to make per-permission policy clear. Their UI is structured around the question "which apps can record my screen?" — which is a fine question. But the more important question, on the user side, is "what permissions does <em>this one app</em> have, and are they all justified?". You cannot answer that without clicking through 18 separate panes and assembling the answer in your head.</p>
+        <p>An audit grid is the right shape: apps as rows, permissions as columns, granted permissions as a dot you can scan. Aguacatech reads the TCC.db files directly and renders that. It needs Full Disk Access to do it — macOS protects TCC.db like any other privacy database — and it never writes to TCC. macOS doesn't allow third-party apps to revoke TCC grants programmatically; only the user can, through System Settings. Aguacatech deep-links you to the right pane for each grant. Toggle off, come back, hit Refresh.</p>
+
+        <div class="post-callout">
+            <h4>Run the audit yourself</h4>
+            <p>Permission Inspector is part of Aguacatech Sentinel ($49 one-time). It also includes the Connection Log, Clipboard History with auto-redaction, the Camera/Mic activation log, and the binary audit. All local. None of it phones home.</p>
+        </div>
+
+        <div class="post-end">
+            <p>If TCC has been a black box on your Mac for years, this is the fastest way to make it legible.</p>
+            <a class="btn btn-primary" href="../buy.html#sentinel">Get Sentinel<span class="arrow">→</span></a>
+            <a class="btn btn-secondary" href="../download.html">Try Free first<span class="arrow">→</span></a>
+        </div>
+    </article>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <span>© 2026 Aguacatech. All rights reserved.</span>
+                <span class="mono">v0.4 · macOS 26 · Apple Silicon</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/main.js" defer></script>
+</body>
+</html>

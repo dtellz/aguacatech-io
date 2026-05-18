@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#07090a">
+    <title>Building a local-first AI agent that genuinely never phones home · Aguacatech</title>
+    <meta name="description" content="LM Studio's OpenAI-compatible endpoint, streaming tool calls, approval gates with unified diffs, Quick Actions via NSEvent double-tap. The architecture behind a Mac AI that ships without a SaaS dependency.">
+    <link rel="canonical" href="https://aguacatech.eu/blog/local-first-ai-devlog.html">
+    <meta property="og:title" content="Building a local-first AI agent that genuinely never phones home">
+    <meta property="og:description" content="The architecture choices behind a Mac AI that ships without a SaaS dependency.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aguacatech.eu/blog/local-first-ai-devlog.html">
+    <meta property="og:image" content="https://aguacatech.eu/assets/img/og-image.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="article:published_time" content="2026-04-29">
+    <meta name="keywords" content="local llm mac, LM Studio swift, mac ai agent, tool calling local model, swiftui llm, mcp client mac, Aguacatech">
+    <link rel="icon" type="image/svg+xml" href="../assets/img/logo.svg">
+    <link rel="preconnect" href="https://rsms.me">
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+    <nav class="nav" id="nav">
+        <div class="nav-inner">
+            <a class="brand" href="../">
+                <img src="../assets/img/logo.svg" alt="" width="26" height="26">
+                Aguacatech
+            </a>
+            <div class="nav-links">
+                <a href="../#features">Features</a>
+                <a href="../#pricing">Pricing</a>
+                <a href="./">Blog</a>
+                <a href="../privacy.html">Privacy</a>
+            </div>
+            <div class="nav-cta">
+                <a class="btn btn-primary btn-sm" href="../download.html">Download</a>
+            </div>
+        </div>
+    </nav>
+
+    <article class="post">
+        <div class="post-meta">
+            <span class="tag devlog">Devlog</span>
+            <span>2026-04-29 · 11 min read · by Diego Tellez</span>
+        </div>
+        <h1>Building a local-first AI agent that genuinely never phones home</h1>
+        <p class="post-lead">Most "local AI" Mac apps cheat. They run a model locally for the chat surface but ship telemetry, account systems, and crash reporters that quietly stream usage data home. Aguacatech is built on the constraint that this is unacceptable. Here is what that looks like in practice — and the four architectural choices that made it possible.</p>
+
+        <h2>Constraint #1 — no cloud, ever, even for "convenience"</h2>
+        <p>The first decision was that the app would not ship a single network client of its own. No analytics SDK. No Sentry. No "anonymized usage statistics." No remote feature flags. No update-check pings. Even the license key never round-trips to a server — activation is local-by-format.</p>
+        <p>This was a hard rule, not a goal. Hard rules make architecture decisions easier later. When I needed an embedding for the local memory store, "let's use OpenAI's embeddings API" was off the table by definition, and I went looking for Apple's bundled <code>NLEmbedding</code> instead. When I wanted speech recognition for Voice mode, "let's use Whisper.cpp bundled in the app" was on the table (it runs locally), but "let's call Apple's <code>SFSpeechRecognizer</code>" was simpler and runs on-device too — so it won.</p>
+
+        <h2>Constraint #2 — talk to LM Studio over its OpenAI shim</h2>
+        <p>I did not want to embed a model runner inside the app. Two reasons:</p>
+        <ul>
+            <li><strong>Trust.</strong> If Aguacatech bundles llama.cpp, every model file becomes the app's responsibility. Updates, quantizations, hardware-specific kernels — it is a second product to maintain. <em>LM Studio</em> and <em>Ollama</em> already do this well.</li>
+            <li><strong>RAM.</strong> The model is usually 4–20 GB resident. If it lived in-process, every relaunch of Aguacatech would re-load the model. With an external runtime, the model stays warm.</li>
+        </ul>
+        <p>The architecture is then trivially small: Aguacatech is a SwiftUI app that talks to <code>http://localhost:1234/v1/chat/completions</code> (LM Studio's default). The same client also works against <code>http://localhost:11434/v1</code> (Ollama) and <code>http://localhost:8080/v1</code> (mlx-server). Streaming is implemented via <code>URLSession.bytes(for:)</code> reading SSE <code>data:</code> lines.</p>
+        <pre><code>let (bytes, _) = try await session.bytes(for: request)
+for try await line in bytes.lines {
+    guard line.hasPrefix("data: ") else { continue }
+    let payload = line.dropFirst(6)
+    if payload == "[DONE]" { break }
+    let delta = try JSONDecoder().decode(StreamDelta.self, from: Data(payload.utf8))
+    continuation.yield(delta)
+}</code></pre>
+        <p>That's the whole streaming reader. The OpenAI shim is the lingua franca of local-LLM tooling now — every runner speaks it, every prompt-engineering frontend speaks it. Build to the standard, get a whole ecosystem for free.</p>
+
+        <h2>Constraint #3 — tools, not magic</h2>
+        <p>When the agent needs to read a file, it calls <code>read_file(path)</code>. When it needs to drive Calendar, it calls <code>run_applescript(script)</code>. There is no special framework, no "agent autonomy", no implicit capability. Every tool is a typed Swift struct conforming to a single protocol:</p>
+        <pre><code>nonisolated struct ChatTool {
+    let schema: ChatToolSchema
+    let run: (String) async throws -> String
+}</code></pre>
+        <p>The OpenAI tool-call wire format means the model produces structured JSON arguments that map directly onto each tool's signature. <code>AgentRunner</code> dispatches the call, awaits the result, appends it as a <code>tool</code>-role message, and loops up to 8 iterations.</p>
+        <p>This is mundane code. That is the point. The "agent" is not magic — it is a loop. The intelligence is in the model.</p>
+
+        <h2>Constraint #4 — approval gates with unified diffs</h2>
+        <p>The first version of the file-write tool wrote files directly. The first time the agent rewrote a config file I had open in another editor, I knew that was wrong.</p>
+        <p>Every destructive tool now pauses the agent loop and surfaces an approval card in the chat. <code>write_file</code> renders a unified diff between the on-disk content and the proposed write. <code>run_applescript</code> shows the literal script. <code>run_shortcut</code> shows the shortcut name. <code>run_shell_command</code> shows the literal command and cwd. MCP tools flagged destructive show their argument JSON.</p>
+        <p>The approval card has three buttons: <strong>Allow once</strong>, <strong>Always allow this tool</strong>, <strong>Deny</strong>. Always-allow is per-tool (not per-(tool, args)), persists in <code>UserDefaults</code>, and can be wiped by toggling the approval system off and back on. Deny returns an error to the model — which adapts and tries something else, instead of stalling.</p>
+        <p>One small detail that took longer than it should have: the diff for <code>write_file</code> has to be computed against the file <em>as it is right now</em>, not as it was when the model decided to write. Local files mutate between turns. The approval card recomputes the diff each time it is shown.</p>
+
+        <h2>The Quick Actions trick: double-tap Option</h2>
+        <p>One of the most-used surfaces is Quick Actions — a floating panel that reads your clipboard, runs an LLM transformation, and copies the result back. The trigger is <strong>double-tap Option</strong>, anywhere in macOS.</p>
+        <p>Implementing this without conflicting with system shortcuts was harder than expected. Modifier-plus-letter combinations are taken by half the apps on a developer's Mac. Pure-modifier combinations (just <code>⌘</code>, just <code>⌥</code>) require listening to <code>NSEvent.flagsChanged</code> with both global and local monitors and tracking the time delta between presses:</p>
+        <pre><code>NSEvent.addGlobalMonitorForEvents(matching: .flagsChanged) { event in
+    handleFlagsChanged(event)
+}
+NSEvent.addLocalMonitorForEvents(matching: .flagsChanged) { event in
+    handleFlagsChanged(event)
+    return event
+}</code></pre>
+        <p>The handler detects the <em>release</em> of Option (so a tap, not a hold), with no other modifier engaged, within ~350 ms of the previous Option release. Two taps in that window = trigger. Adding any other modifier mid-sequence resets it, so <code>⌥⌘</code>, <code>⌥⇧</code>, <code>⌥⌃</code> all pass through cleanly to whatever app owns them.</p>
+        <p>The global monitor requires <strong>Accessibility</strong> permission. The local monitor works without it — so even before the user grants Accessibility, the gesture works inside Aguacatech's own windows. This makes the unhappy path tolerable.</p>
+        <p>(There was an earlier <code>⌘⇧A</code> binding via the Carbon Hot Key API. It crashed with a MainActor isolation trap and the UX was worse anyway. We left <code>HotkeyManager</code> in the source tree for future use, with all dispatch routed through <code>MainActor.assumeIsolated</code>, but it is not wired to anything user-visible.)</p>
+
+        <h2>What MCP buys you, and what it doesn't</h2>
+        <p>Aguacatech is a <strong>Model Context Protocol</strong> client. MCP is an open protocol — Aguacatech speaks the spec, any compliant MCP server can join the agent's tool registry as <code>mcp__&lt;server&gt;__&lt;tool&gt;</code>. Servers run as local subprocesses (stdio) or as remote HTTP endpoints. The handshake is small: <code>initialize</code>, <code>tools/list</code>, optional <code>resources/list</code>.</p>
+        <p>What this means in practice: when someone publishes an MCP server for Linear, or Postgres, or browser automation, Aguacatech inherits it. The Power-tier user adds a server config and the tools appear in the next chat. No app update needed.</p>
+        <p>What MCP <em>doesn't</em> buy you: free safety. MCP servers run with Aguacatech's privileges. Approval gates apply, but the user still has to trust the server's code. We do not yet sandbox stdio servers — that is on the roadmap, alongside Keychain-backed env-var storage for tokens.</p>
+
+        <h2>Persistence and the part where the user owns the data</h2>
+        <ul>
+            <li>Conversations: JSON at <code>~/Library/Application Support/aguacatech/conversations.json</code>.</li>
+            <li>Logs: JSONL at <code>~/Library/Application Support/aguacatech/logs.jsonl</code>.</li>
+            <li>Memory: SQLite at <code>~/Library/Application Support/aguacatech/memory.sqlite</code>, embedded with <code>NLEmbedding</code>.</li>
+            <li>Clipboard history: AES-GCM-encrypted SQLite, key in Keychain.</li>
+            <li>Camera & mic activation log: SQLite, append-only.</li>
+            <li>Connection log: SQLite, indexed by opened_at / process / remote_addr.</li>
+            <li>License: <code>UserDefaults</code> under the bundle ID.</li>
+        </ul>
+        <p>To uninstall and forget: trash the app via the in-app Uninstaller (it handles its own orphan scan), then <code>defaults delete com.aguacatech</code>. Nothing leaves a trace anywhere else, because nothing was ever sent anywhere else.</p>
+
+        <div class="post-callout">
+            <h4>The honest measurement</h4>
+            <p>Build a wireshark filter for everything to and from <code>com.aguacatech</code>. Run the app for a week. The only outbound traffic you will see is whatever you have configured the LLM endpoint as. If that is <code>localhost:1234</code> (LM Studio), the count is zero packets leaving the machine — by definition. That is the bar.</p>
+        </div>
+
+        <h2>What's next</h2>
+        <ul>
+            <li><strong>Keychain-backed MCP tokens.</strong> Today they live in plaintext on disk in <code>mcp-servers.json</code>. Not great.</li>
+            <li><strong>Local model manager v2.</strong> Per-conversation model overrides — "use the coder model just for this thread".</li>
+            <li><strong>Multi-agent inside scheduled tasks.</strong> The wiring is half-done; the headless run still uses the single-role loop.</li>
+            <li><strong>Whisper-backed voice for multilingual users.</strong> Apple's stack is great for English; Whisper is still the bar for everything else.</li>
+        </ul>
+
+        <div class="post-end">
+            <p>If any of this resonates: download Aguacatech (Free is generous), point it at LM Studio, send a message. Reply to <a href="mailto:hello@aguacatech.eu">hello@aguacatech.eu</a> with thoughts.</p>
+            <a class="btn btn-primary" href="../download.html">Download Aguacatech<span class="arrow">→</span></a>
+            <a class="btn btn-secondary" href="../#pricing">See pricing<span class="arrow">→</span></a>
+        </div>
+    </article>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <span>© 2026 Aguacatech. All rights reserved.</span>
+                <span class="mono">v0.4 · macOS 26 · Apple Silicon</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/main.js" defer></script>
+</body>
+</html>
